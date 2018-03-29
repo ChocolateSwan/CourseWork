@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link href="/static/css/styles.css" rel="stylesheet" media="screen">
+
+</head>
+<body>
+    <div><h3>Медленный медленный поиск...</h3></div>
+
+
+
+    <!--Форма через шаблонизатор-->
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.search.label }}<br>
+            {{ form.search(size=32) }}
+            {% for error in form.search.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>
+            {{ form.select_url.label }}<br>
+            {{ form.select_url() }}
+        </p>
+        <p>{{ form.another_site_flag() }} {{ form.another_site_flag.label }}</p>
+        <p>
+            {{ form.another_site.label }}<br>
+            {{ form.another_site() }}
+        </p>
+        <p>{{ form.search_btn() }}</p>
+    </form>
+
+<!--Цикл для списка найденных вариантов-->
+{% for item in results %}
+<div>
+    <p>{{item.text}}
+        <br> Страница: {{ item.url }}
+    </p>
+</div>
+
+{% endfor %}
+
+    <!--Сообщения-->
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </hr>
+
+
+
+
+    <script src="/static/form_control.js"></script>
+
+</body>
+</html>

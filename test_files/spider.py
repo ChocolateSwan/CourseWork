@@ -10,7 +10,10 @@ from scrapy.crawler import CrawlerProcess
 from urllib.parse import urljoin
 from scrapy.linkextractor import LinkExtractor
 import re
-
+import urllib.parse
+from scrapy import log, signals
+from twisted.internet import reactor
+from scrapy.xlib.pydispatch import dispatcher
 
 # class SpyderItem(scrapy.Item):
 #     title = scrapy.Field()
@@ -21,7 +24,7 @@ import re
 class Spider(scrapy.Spider):
     name = "spider"
     # TODO: into params
-    allowed_domains = ['www.uni-stuttgart.de']
+    allowed_domains = ['teplo-seti.ru']
     # start_urls = [
     #     'http://www.dmu.ac.uk',
     # ]
@@ -35,6 +38,20 @@ class Spider(scrapy.Spider):
 
     def parse(self, response):
         print("Current url: ", response.url)
+
+        #Обработка текста
+        # print(((response.body).decode()))
+        resp_body = response.body.decode()
+        # print(resp_body)
+        print("результат поиска")
+        # print(*list(re.findall(r'[^>]*тел[^<]*', resp_body)), sep="\n")
+        print("xpath")
+
+        print(response.xpath('//p/text()').re(r'\w*котел\w*'))#.re(r'...кот...')
+        # response.xpath('//a[contains(@href, "image")]/text()').re(r'Name:\s*(.*)')
+
+
+
         if response.url not in self.visited_urls:
             # Вытаскиваем улры со страницы
             link_extractor = LinkExtractor()
@@ -78,6 +95,22 @@ process = CrawlerProcess({
     'LOG_LEVEL': 'INFO',
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
+results = []
 
-process.crawl(Spider, start_url ="https://www.uni-stuttgart.de")
+# def
+
+# этоооооооооо
+# dispatcher.connect(crawler_results, signal=signals.item_passed)
+
+process.crawl(Spider, start_url ="http://teplo-seti.ru")
 process.start()
+
+# log.
+
+log.start(logfile="results.log", loglevel=log.DEBUG, crawler=crawler, logstdout=False)
+
+reactor.run()
+
+with open("results.log", "r") as f:
+    result = f.read()
+print(result)
