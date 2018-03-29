@@ -1,4 +1,4 @@
-/*TODO стрелка у select, select options, выровнять checkbox, стиль ошибок*/
+/*TODO стрелка у select (arrow), select options, выровнять checkbox, стиль ошибок*/
 
 body{
     background-color: #baccc5;
@@ -37,6 +37,10 @@ form {
     color: #050201;
 }
 
+.form-input:disabled{
+    background: #d4cbb8;
+}
+
 .form-btn {
     font-size: 26px;
     color: white;
@@ -44,6 +48,8 @@ form {
     background: #465457;
     border-radius: 5px 5px 5px 5px;
     cursor: pointer;
+    letter-spacing: 2px;
+
 }
 
 form p label{
@@ -87,6 +93,10 @@ select {
     border: 2px solid #7BA7AB;
     background: #F9F0DA;
     color: #333;
+}
+
+select:disabled{
+        background: #d4cbb8;
 }
 
 /*select option {*/
