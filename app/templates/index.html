@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>@Поиск</title>
     <link href="/static/css/styles.css" rel="stylesheet" media="screen">
-
 </head>
 <body>
-    <div><h3>Медленный медленный поиск...</h3></div>
-
-
-
-    <!--Форма через шаблонизатор-->
+    <div>
+        <h3>Медленный медленный поиск...</h3>
+    </div>
 
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -20,31 +17,40 @@
             {{ form.search.label }}<br>
             {{ form.search(size=32) }}
             {% for error in form.search.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">
+                [{{ error }}]
+            </span>
             {% endfor %}
         </p>
 
-        <p>
-            {{ form.select_url.label }}<br>
-            {{ form.select_url() }}
-        </p>
-        <p>{{ form.another_site_flag() }} {{ form.another_site_flag.label }}</p>
-        <p>
-            {{ form.another_site.label }}<br>
-            {{ form.another_site() }}
-        </p>
-        <p>{{ form.search_btn() }}</p>
+        <div>
+            <span>
+                {{ form.select_url() }}
+            </span>
+            <span>
+                {{ form.another_site_flag() }}
+                {{ form.another_site_flag.label }}
+            </span>
+            <span>
+                {{ form.another_site() }}
+            </span>
+        </div>
+        <div style=" width:100%;display:inline-block;">
+            <p style='float: right;'>
+                {{ form.search_btn() }}
+            </p>
+        </div>
     </form>
 
-<!--Цикл для списка найденных вариантов-->
-{% for item in results %}
-<div>
-    <p>{{item.text}}
-        <br> Страница: {{ item.url }}
-    </p>
-</div>
+    <!--Цикл для списка найденных вариантов-->
+    {% for item in results %}
+    <div>
+        <p>{{item.text}}
+            <br> Страница: {{ item.url }}
+        </p>
+    </div>
 
-{% endfor %}
+    {% endfor %}
 
     <!--Сообщения-->
     <hr>
@@ -52,17 +58,17 @@
         {% if messages %}
         <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <li>
+                {{ message }}
+            </li>
             {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
     </hr>
-
-
-
-
     <script src="/static/form_control.js"></script>
-
 </body>
 </html>
+
+
+<!--TODO лажает при перезагрузке-->
