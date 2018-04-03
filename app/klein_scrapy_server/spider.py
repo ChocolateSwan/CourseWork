@@ -28,11 +28,11 @@ class Spider(scrapy.Spider):
 
     # TODO: start_url to array
     # TODO allowed domains в конструктор
-    def __init__(self, start_url=None, word="котел",  *args, **kwargs):
+    def __init__(self, url=None, word="котел",  *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
         self.start_urls = ["http://teplo-seti.ru"]
         self.word = word
-        print (self.start_urls, self.word)
+        print (url, self.word)
 
     def parse(self, response):
         print("Current url: ", response.url)
@@ -86,5 +86,6 @@ class Spider(scrapy.Spider):
     def parse_result(self, response):
         item = SpiderItem()
         item['url'] = response.url
+        # TODO Сделать set а то повторы
         item['found_arr'] = response.xpath('//p/text()').re(r'\w*котел\w*')
         yield item

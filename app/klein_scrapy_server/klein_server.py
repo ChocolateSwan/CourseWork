@@ -47,9 +47,11 @@ def return_spider_output(output):
 def schedule(request):
     word = request.args[b"word"][0]
     word = word.decode('utf-8')
+    url = request.args[b"url"][0]
+    url = url.decode('utf-8')
     runner = MyCrawlerRunner() #{"FEED_EXPORT_ENCODING":'utf-8'}
     spider = Spider() # Зачем он заходит в инит в этой строке и в строке dfd = self._crawl(crawler, *args, **kwargs)
-    deferred = runner.crawl(spider, word=word)
+    deferred = runner.crawl(spider, word=word, url=url)
     deferred.addCallback(return_spider_output)
     return deferred
 

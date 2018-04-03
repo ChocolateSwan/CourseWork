@@ -42,17 +42,7 @@
         </div>
     </form>
 
-    <!--Цикл для списка найденных вариантов-->
-    <!--{% for item in results %}-->
-    <!--<div>-->
-        <!--<p>{{item.text}}-->
-            <!--<br> Страница: {{ item.url }}-->
-        <!--</p>-->
-    <!--</div>-->
 
-    <!--{% endfor %}-->
-
-    <!--Сообщения-->
     <hr>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -67,9 +57,20 @@
         {% endwith %}
     </hr>
 
+    <!--Цикл для списка найденных вариантов-->
+    {% for item in results %}
     <div>
-        {{results}}
+        <p> Страница: {{ item.url }}
+            <br>
+            Варианты:
+            <br>
+            {% for word in item.found_arr %}
+            <strong>{{ word }}</strong> <br>
+            {% endfor %}
+        </p>
     </div>
+
+    {% endfor %}
 
     <script src="/static/js/form_control.js"></script>
 </body>

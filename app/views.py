@@ -3,8 +3,6 @@ from flask import render_template, flash
 from app.forms import SearchForm
 import requests
 
-word = "qwerty"
-
 @app.route('/', methods=['GET', 'POST'])
 def search():
     form = SearchForm() # csrf_enabled=False
@@ -12,9 +10,15 @@ def search():
     if form.validate_on_submit():
         # TODO анализ несколько слов
         # TODO подсказки
-        response = requests.get('http://127.0.0.1:8900/?word={}'.format(form.data['search']))
+        # TODO переписать иф покороче
+        if form.data['another_site_flag']:
+            url = form.data['another_site']
+        else:
+            url = form.data['select_url']
+        response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
+                                .format(w=form.data['search'],
+                                        u=url))
         print(response.json())
-        print("поиск удался")
         flash('Поиск удался =)')
         return render_template("index.html",
                         form = form,
