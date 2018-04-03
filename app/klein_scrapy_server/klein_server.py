@@ -4,7 +4,7 @@ from klein import route, run
 from scrapy import signals
 from scrapy.crawler import CrawlerRunner
 
-from spider import PycoderSpider
+from spider import Spider
 
 
 class MyCrawlerRunner(CrawlerRunner):
@@ -48,10 +48,18 @@ def schedule(request):
     word = request.args[b"word"][0]
     word = word.decode('utf-8')
     runner = MyCrawlerRunner() #{"FEED_EXPORT_ENCODING":'utf-8'}
-    spider = PycoderSpider() # Зачем он заходит в инит в этой строке и в строке dfd = self._crawl(crawler, *args, **kwargs)
+    spider = Spider() # Зачем он заходит в инит в этой строке и в строке dfd = self._crawl(crawler, *args, **kwargs)
     deferred = runner.crawl(spider, word=word)
     deferred.addCallback(return_spider_output)
     return deferred
 
 
 run("localhost", 8900)
+
+# TODO настройки в раннер
+# process = CrawlerRunner({
+#         "CONCURRENT_REQUESTS": 100,
+#         "REACTOR_THREADPOOL_MAXSIZE": 20,
+#         'LOG_LEVEL': 'INFO',
+#         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+#     })
