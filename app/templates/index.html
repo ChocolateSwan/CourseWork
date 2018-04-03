@@ -43,14 +43,14 @@
     </form>
 
     <!--Цикл для списка найденных вариантов-->
-    {% for item in results %}
-    <div>
-        <p>{{item.text}}
-            <br> Страница: {{ item.url }}
-        </p>
-    </div>
+    <!--{% for item in results %}-->
+    <!--<div>-->
+        <!--<p>{{item.text}}-->
+            <!--<br> Страница: {{ item.url }}-->
+        <!--</p>-->
+    <!--</div>-->
 
-    {% endfor %}
+    <!--{% endfor %}-->
 
     <!--Сообщения-->
     <hr>
@@ -66,6 +66,11 @@
         {% endif %}
         {% endwith %}
     </hr>
+
+    <div>
+        {{results}}
+    </div>
+
     <script src="/static/form_control.js"></script>
 </body>
 </html>

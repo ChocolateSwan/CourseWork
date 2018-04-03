@@ -8,18 +8,16 @@ python3 ./...
 import scrapy
 from scrapy.crawler import CrawlerProcess
 from urllib.parse import urljoin
-from scrapy.linkextractor import LinkExtractor
+#linkextractor было
+from scrapy.linkextractors import LinkExtractor
 import re
 import urllib.parse
-from scrapy import log, signals
+from scrapy import signals
+import logging
 from twisted.internet import reactor
-from scrapy.xlib.pydispatch import dispatcher
+# from scrapy.xlib.pydispatch import dispatcher
 
-# class SpyderItem(scrapy.Item):
-#     title = scrapy.Field()
-#     body = scrapy.Field()
-#     date = scrapy.Field()
-
+RESULTS = []
 
 class Spider(scrapy.Spider):
     name = "spider"
@@ -32,9 +30,10 @@ class Spider(scrapy.Spider):
     result_urls = set()
 
     # TODO: start_url to array
-    def __init__(self, start_url=None, *args, **kwargs):
+    def __init__(self, start_url=None, word="котел",  *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
         self.start_urls = [start_url]
+        self.word = word
 
     def parse(self, response):
         print("Current url: ", response.url)
@@ -46,8 +45,12 @@ class Spider(scrapy.Spider):
         print("результат поиска")
         # print(*list(re.findall(r'[^>]*тел[^<]*', resp_body)), sep="\n")
         print("xpath")
+        print ()
+        search_results = response.xpath('//p/text()').re(r'\w*котел\w*')#.re(r'...кот...')
 
-        print(response.xpath('//p/text()').re(r'\w*котел\w*'))#.re(r'...кот...')
+        if len(search_results):
+            RESULTS.append({response.url: search_results})
+            print({response.url: search_results})
         # response.xpath('//a[contains(@href, "image")]/text()').re(r'Name:\s*(.*)')
 
 
@@ -68,7 +71,7 @@ class Spider(scrapy.Spider):
             # extracted_urls = list(filter(lambda x: "study" in x, extracted_urls))
 
             # TODO query string, lowercase
-            print(len(extracted_urls))
+            # print(len(extracted_urls))
             # for url in extracted_urls:
             #     print(url)
 
@@ -76,41 +79,27 @@ class Spider(scrapy.Spider):
 
             self.result_urls.update(diff)
 
-            print(len(self.result_urls))
+            # print(len(self.result_urls))
+            #
+            # print (len(diff))
+            #
+            # for url in diff:
+            #     print(url)
 
-            print (len(diff))
+# Раскомментировать!!!!!!!!!!
+            # for url in list(diff):
+            #     yield response.follow(url, callback=self.parse)
 
-            for url in diff:
-                print(url)
+if __name__ == "__main__":
 
+    process = CrawlerProcess({
+            "CONCURRENT_REQUESTS": 100,
+            "REACTOR_THREADPOOL_MAXSIZE": 20,
+            'LOG_LEVEL': 'INFO',
+            'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+        })
 
-            for url in list(diff):
-                yield response.follow(url, callback=self.parse)
-
-
-
-process = CrawlerProcess({
-    "CONCURRENT_REQUESTS": 100,
-    "REACTOR_THREADPOOL_MAXSIZE": 20,
-    'LOG_LEVEL': 'INFO',
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-})
-results = []
-
-# def
-
-# этоооооооооо
-# dispatcher.connect(crawler_results, signal=signals.item_passed)
-
-process.crawl(Spider, start_url ="http://teplo-seti.ru")
-process.start()
-
-# log.
-
-log.start(logfile="results.log", loglevel=log.DEBUG, crawler=crawler, logstdout=False)
-
-reactor.run()
-
-with open("results.log", "r") as f:
-    result = f.read()
-print(result)
+    process.crawl(Spider,
+                  start_url="http://teplo-seti.ru",
+                  word="qq")
+    process.start()

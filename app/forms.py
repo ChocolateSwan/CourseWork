@@ -8,10 +8,8 @@ class SearchForm(FlaskForm):
                          render_kw={"class": "form-input form-input-width-100"})
     # TODO choices as list
     select_url = SelectField(u'выбрать сайт для поиска',
-                             choices=[('yandex', 'yandex.ru'), ('google', 'google.com'), ('rambler', 'rambler.ru')],
-                             validators=[DataRequired("Не пустое")])
-    another_site_flag = BooleanField('другой сайт',render_kw={"class": "checkbox-hidden"}
-                                     )
-    another_site = StringField('сайт не из списка', validators=[DataRequired()],
+                             choices=[('yandex', 'yandex.ru'), ('google', 'google.com'), ('rambler', 'rambler.ru')],)
+    another_site_flag = BooleanField('другой сайт',render_kw={"class": "checkbox-hidden"})
+    another_site = StringField('сайт не из списка',
                                render_kw={"class": "form-input form-input-width-50"})#, render_kw={'disabled':''},
     search_btn = SubmitField('Искать', render_kw={"class": "form-btn"})

@@ -1,30 +1,41 @@
 from app import app
 from flask import render_template, flash, redirect, url_for
 from app.forms import SearchForm
-# from .forms import SearchForm
+from .start_crawler import run_spider
+import subprocess
+import requests
+word = "qwerty"
 
-
-
-# @app.before_request
-# def before_request():
-#     g.user = current_user
-#     if g.user.is_authenticated():
-#         g.user.last_seen = datetime.utcnow()
-#         db.session.add(g.user)
-#         db.session.commit()
-#         g.search_form = SearchForm()
 
 @app.route('/', methods=['GET', 'POST'])
 def search():
+
+    r = requests.get('http://127.0.0.1:8900/?word={}'.format(word))
+    print(r.json())
+
+
     print("hello")
     url = "http://test.ru"
     form = SearchForm() # csrf_enabled=False
+    print(form.data)
     if form.validate_on_submit():
+        results = []
+        if form.data['search'] == "qq":
+
+            # results = run_spider()
+            print("rrr", subprocess.check_output(['python3', './app/spider.py']))
+
+        # print ("rrr", subprocess.check_output(['python3', './app/spider.py']))
+        print(results)
+        print("поиск удался")
         flash('Поиск удался =)')
-        return redirect(url_for('search'))
+        return render_template("index.html", url=url,
+                        form = form,
+                        results = results)
     return render_template("index.html",
                            url=url,
-                           form=form)
+                           form=form,
+                           results = "не было поиска")
 
 
 
