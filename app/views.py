@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, flash
+from flask import render_template, flash, jsonify
 from app.forms import SearchForm
 import requests
 
@@ -32,7 +32,14 @@ def search():
 
 
 
+@app.route('/process_form/', methods=['post'])
+def process_form():
+    return jsonify(data={1:2})
 
+#     form = OurForm()
+#     if form.validate_on_submit():
+#         return jsonify(data={'message': 'hello {}'.format(form.foo.data)})
+# return jsonify(data=form.errors)
 
 # Кастомная страница защиты от CSRF
 # from flask_wtf.csrf import CSRFError

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Поиск</title>
     <link href="/static/css/styles.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/form_control.js"></script>
 </head>
 <body>
     <div>
@@ -16,11 +18,8 @@
         <p>
             {{ form.search.label }}<br>
             {{ form.search(size=32) }}
-            {% for error in form.search.errors %}
-            <span style="color: red;">
-                [{{ error }}]
+            <span id="search_error" style="color: red;">
             </span>
-            {% endfor %}
         </p>
 
         <div>
@@ -33,6 +32,8 @@
             </span>
             <span>
                 {{ form.another_site() }}
+            </span>
+            <span id="url_error" style="color: red;">
             </span>
         </div>
         <div style=" width:100%;display:inline-block;">
@@ -72,7 +73,7 @@
 
     {% endfor %}
 
-    <script src="/static/js/form_control.js"></script>
+    <!--<script src="/static/js/form_control.js"></script>-->
 </body>
 </html>
 
