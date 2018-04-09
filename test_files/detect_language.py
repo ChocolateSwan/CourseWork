@@ -6,7 +6,7 @@
 import cld2
 
 # текст на Русском
-details = cld2.detect("<title>北京航空航天大学</title>")
+details = cld2.detect("hello every body")
 print(str(details))
 
 # Вывод:

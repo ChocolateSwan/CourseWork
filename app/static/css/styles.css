@@ -46,7 +46,7 @@ form {
 }
 
 .form-input-width-50{
-        width: 40%;
+        width: 30%;
 }
 
 .form-btn {
@@ -129,3 +129,5 @@ select:disabled{
     font-size: 20px;
     letter-spacing: 2px;
 }
+
+.results

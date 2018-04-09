@@ -1,21 +1,31 @@
 PROGRAMS = [
     {
-        "url": "https://www.fh-ooe.at/",
-        "название": "Университет прикладных наук Верхней Австрии",
-        "страна": "Австрия",
-        "язык": "",
-        "программы":"https://www.fh-ooe.at/studieren/studienangebot/"
+        "url": "http://www.dmu.ac.uk/",
+        "название": "Университет де Монфорт",
+        "страна": "Великобритания",
+        "язык": "en",
+        "программы":"http://www.dmu.ac.uk/study/"
     },
-    # {
-    #     "url": "http://www.ulg.ac.be/",
-    #     "страна": "Бельгия",
-    #     "название": "Льежский университет",
-    #     "язык": "",
+        {
+        "url": "https://www.northumbria.ac.uk",
+        "название": "Университет Нортумбрии",
+        "страна": "Великобритания",
+        "язык": "en",
+        "программы":"https://www.northumbria.ac.uk/study-at-northumbria/"
+    },
+    #     {
+    #     "url": "https://www.glyndwr.ac.uk",
+    #     "название": "Университет Глиндер",
+    #     "страна": "Великобритания",
+    #     "язык": "en",
     #     "программы":"https://www.fh-ooe.at/studieren/studienangebot/"
-    # }
-
-
-
-
+    # },
+    #     {
+    #     "url": "https://www.coventry.ac.uk/cu",
+    #     "название": "Университет Кавентри",
+    #     "страна": "Великобритания",
+    #     "язык": "en",
+    #     "программы":"https://www.fh-ooe.at/studieren/studienangebot/"
+    # },
 
 ]

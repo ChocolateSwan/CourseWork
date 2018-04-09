@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84bf6824-5e6f-48f7-86e2-9654269f41ad" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/program_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/klein_scrapy_server/klein_server.py" afterPath="$PROJECT_DIR$/app/klein_scrapy_server/klein_server.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/klein_scrapy_server/spider.py" afterPath="$PROJECT_DIR$/app/klein_scrapy_server/spider.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/forms.py" afterPath="$PROJECT_DIR$/app/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/program_dict.py" afterPath="$PROJECT_DIR$/app/program_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/css/styles.css" afterPath="$PROJECT_DIR$/app/static/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/js/form_control.js" afterPath="$PROJECT_DIR$/app/static/js/form_control.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/index.html" afterPath="$PROJECT_DIR$/app/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_files/detect_language.py" afterPath="$PROJECT_DIR$/test_files/detect_language.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +18,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/CourseWork$multy_page_spyder.coverage" NAME="multy_page_spyder Coverage Results" MODIFIED="1521298106887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CourseWork$test_spyder.coverage" NAME="test_spyder Coverage Results" MODIFIED="1520701317796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/CourseWork$detect_language.coverage" NAME="detect_language Coverage Results" MODIFIED="1521299297315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_files" />
+    <SUITE FILE_PATH="coverage/CourseWork$detect_language.coverage" NAME="detect_language Coverage Results" MODIFIED="1523290293700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_files" />
     <SUITE FILE_PATH="coverage/CourseWork$test_translate.coverage" NAME="test_translate Coverage Results" MODIFIED="1520710590484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CourseWork$test_yandex_search.coverage" NAME="test_yandex_search Coverage Results" MODIFIED="1520710596926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CourseWork$spider.coverage" NAME="spider Coverage Results" MODIFIED="1522183417308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test_files" />
@@ -42,21 +39,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form_control.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1900">
-              <caret line="115" column="59" lean-forward="false" selection-start-line="115" selection-start-column="59" selection-end-line="115" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/klein_scrapy_server/spider.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1317">
               <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detect_language.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_files/detect_language.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -75,18 +72,8 @@
       <file leaf-file-name="program_dict.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/program_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/static/css/styles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="128" column="17" lean-forward="true" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -95,24 +82,21 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="13" column="81" lean-forward="false" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
-              <folding />
+            <state relative-caret-position="247">
+              <caret line="13" column="111" lean-forward="false" selection-start-line="13" selection-start-column="111" selection-end-line="13" selection-end-column="111" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/static/css/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="60" column="36" lean-forward="false" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#p#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#3;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="57">
+              <caret line="48" column="17" lean-forward="false" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -148,7 +132,6 @@
         <option value="$PROJECT_DIR$/test_yandex_search.py" />
         <option value="$PROJECT_DIR$/qq.html" />
         <option value="$PROJECT_DIR$/multy_page_spyder.py" />
-        <option value="$PROJECT_DIR$/test_files/detect_language.py" />
         <option value="$PROJECT_DIR$/app/static/styles.css" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/static/form_control.js" />
@@ -158,14 +141,15 @@
         <option value="$PROJECT_DIR$/app/config.py" />
         <option value="$PROJECT_DIR$/app/start_crawler.py" />
         <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/app/forms.py" />
-        <option value="$PROJECT_DIR$/app/program_dict.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/klein_scrapy_server/klein_server.py" />
         <option value="$PROJECT_DIR$/app/klein_scrapy_server/spider.py" />
         <option value="$PROJECT_DIR$/app/templates/index.html" />
-        <option value="$PROJECT_DIR$/app/static/css/styles.css" />
         <option value="$PROJECT_DIR$/app/static/js/form_control.js" />
+        <option value="$PROJECT_DIR$/test_files/detect_language.py" />
+        <option value="$PROJECT_DIR$/app/program_dict.py" />
+        <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/static/css/styles.css" />
       </list>
     </option>
   </component>
@@ -286,7 +270,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.spider">
+  <component name="RunManager" selected="Python.detect_language">
     <configuration name="detect_language" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -386,9 +370,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.spider" />
-        <item index="1" class="java.lang.String" itemvalue="Python.run" />
-        <item index="2" class="java.lang.String" itemvalue="Python.detect_language" />
+        <item index="0" class="java.lang.String" itemvalue="Python.detect_language" />
+        <item index="1" class="java.lang.String" itemvalue="Python.spider" />
+        <item index="2" class="java.lang.String" itemvalue="Python.run" />
         <item index="3" class="java.lang.String" itemvalue="Python.multy_page_spyder" />
         <item index="4" class="java.lang.String" itemvalue="Python.test_yandex_search" />
       </list>
@@ -461,7 +445,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -628,14 +612,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/multy_page_spyder.py" />
-    <entry file="file://$PROJECT_DIR$/test_files/detect_language.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/scrapy/linkextractors/lxmlhtml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -734,18 +710,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/program_dict.py">
+    <entry file="file://$PROJECT_DIR$/app/klein_scrapy_server/spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        <state relative-caret-position="1317">
+          <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/forms.py">
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="13" column="81" lean-forward="false" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
+        <state relative-caret-position="312">
+          <caret line="60" column="36" lean-forward="false" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#p#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#3;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2185">
+          <caret line="115" column="59" lean-forward="false" selection-start-line="115" selection-start-column="59" selection-end-line="115" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -768,39 +757,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/klein_scrapy_server/spider.py">
+    <entry file="file://$PROJECT_DIR$/app/program_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1317">
-          <caret line="91" column="47" lean-forward="false" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/test_files/detect_language.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="60" column="36" lean-forward="false" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
+        <state relative-caret-position="152">
+          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="111" lean-forward="false" selection-start-line="13" selection-start-column="111" selection-end-line="13" selection-end-column="111" />
           <folding>
-            <element signature="n#style#0;n#span#0;n#p#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#1;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="128" column="17" lean-forward="true" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1900">
-          <caret line="115" column="59" lean-forward="false" selection-start-line="115" selection-start-column="59" selection-end-line="115" selection-end-column="59" />
+        <state relative-caret-position="57">
+          <caret line="48" column="17" lean-forward="false" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
           <folding />
         </state>
       </provider>
