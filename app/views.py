@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, flash, jsonify
+from flask import render_template, flash, jsonify, request
 from app.forms import SearchForm
 import requests
 
@@ -30,11 +30,22 @@ def search():
 
 
 
-
-
 @app.route('/process_form/', methods=['post'])
 def process_form():
-    return jsonify(data={1:2})
+    form = SearchForm()
+    # print(form.data)
+    # TODO переписать иф покороче
+    if form.data['another_site_flag']:
+        url = form.data['another_site']
+    else:
+        url = form.data['select_url']
+    response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
+                            .format(w=form.data['search'],
+                                    u=url))
+    print(response.json())
+
+
+    return jsonify(data=response.json())
 
 #     form = OurForm()
 #     if form.validate_on_submit():

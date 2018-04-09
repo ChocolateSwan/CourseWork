@@ -116,6 +116,7 @@ select:disabled{
         background: #d4cbb8;
 }
 
+
 /*select option {*/
     /*margin: 40px;*/
     /*background: black !important;*/
@@ -123,3 +124,8 @@ select:disabled{
     /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*/
 /*}*/
 
+.results{
+    color: #465457;
+    font-size: 20px;
+    letter-spacing: 2px;
+}

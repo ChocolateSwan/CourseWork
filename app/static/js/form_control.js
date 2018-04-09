@@ -6,6 +6,7 @@ $(document).ready(function() {
     const another_site = document.getElementById('another_site');
     const select_url = document.getElementById('select_url');
     const url_error = document.getElementById('url_error');
+    const results = document.getElementById('results');
 
     another_site.disabled = true;
 
@@ -26,16 +27,21 @@ $(document).ready(function() {
 
     $('form').submit(function (e) {
         e.preventDefault();
-        alert("hello");
         const url = "/process_form/"; // {{ url for }}
         if (validate_form()){
+            console.log("ok");
+            // TODO если прошла валидацию то очистить ошибки
             $.ajax({
                 type: "POST",
                 url: url,
                 data: $('form').serialize(),
                 success: function (data) {
-                    // TODO вывод полученных данных на экран
-                    console.log(data)
+                    data.data.forEach(function (el, index) {
+                        $(results).empty();
+                        result_element= "<p> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></p>" +
+                            "<p> Найденные варианты: " + el.found_arr + "</p>";
+                        $(result_element).clone().appendTo( results );
+                    })
             }
         });
         }
@@ -61,15 +67,14 @@ $(document).ready(function() {
     });
 
     function validate_form() {
+        console.log("dv");
         return search.value !== "" &&
-            (another_site.value !== "" && another_site_flag.checked ||
-                select_url.value !== "не выбрано" && !another_site_flag.checked ) &&
-            /\.\w{2,3}\/?/.test(another_site.value)
+            (/\.\w{2,3}\/?/.test(another_site.value) && another_site.value !== "" && another_site_flag.checked ||
+                select_url.value !== "не выбрано" && !another_site_flag.checked )
 
     }
 
     function validate_empty_word_input() {
-        alert("val");
         if (search.value === ""){
             if (!~search_error.innerText.indexOf("заполните") ){
                 search_error.innerText += " [заполните это поле] ";

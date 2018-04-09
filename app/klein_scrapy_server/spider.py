@@ -22,7 +22,7 @@ class SpiderItem(scrapy.Item):
 class Spider(scrapy.Spider):
     name = "spider"
     # TODO: into params
-    allowed_domains = ['teplo-seti.ru']
+    allowed_domains = ['htmlbook.ru']
     visited_urls = []
     result_urls = set()
 
@@ -30,9 +30,10 @@ class Spider(scrapy.Spider):
     # TODO allowed domains в конструктор
     def __init__(self, url=None, word="котел",  *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
-        self.start_urls = ["http://teplo-seti.ru"]
-        self.word = word
-        print (url, self.word)
+        self.start_urls = ["http://htmlbook.ru/html/table"]
+        self.word = "кон"
+        print(self.start_urls, self.word )
+        print (url, word)
 
     def parse(self, response):
         print("Current url: ", response.url)
@@ -43,7 +44,8 @@ class Spider(scrapy.Spider):
         # print(resp_body)
         print("результат поиска")
         # print(*list(re.findall(r'[^>]*тел[^<]*', resp_body)), sep="\n")
-        search_results = response.xpath('//p/text()').re(r'\w*котел\w*')#.re(r'...кот...')
+        search_results = response.xpath('//span/text()').extract()#.re(r'\w*к\w*')#.re(r'...кот...')
+
 
 
         if len(search_results):
@@ -87,5 +89,5 @@ class Spider(scrapy.Spider):
         item = SpiderItem()
         item['url'] = response.url
         # TODO Сделать set а то повторы
-        item['found_arr'] = response.xpath('//p/text()').re(r'\w*котел\w*')
+        item['found_arr'] = response.xpath('//p/text()').re(r'\w*элем\w*')
         yield item

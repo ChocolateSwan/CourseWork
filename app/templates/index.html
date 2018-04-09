@@ -58,22 +58,9 @@
         {% endwith %}
     </hr>
 
-    <!--Цикл для списка найденных вариантов-->
-    {% for item in results %}
-    <div>
-        <p> Страница: {{ item.url }}
-            <br>
-            Варианты:
-            <br>
-            {% for word in item.found_arr %}
-            <strong>{{ word }}</strong> <br>
-            {% endfor %}
-        </p>
+    <div id="results" class="results">
     </div>
 
-    {% endfor %}
-
-    <!--<script src="/static/js/form_control.js"></script>-->
 </body>
 </html>
 
