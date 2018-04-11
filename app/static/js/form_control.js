@@ -7,6 +7,8 @@ $(document).ready(function() {
     const select_url = document.getElementById('select_url');
     const url_error = document.getElementById('url_error');
     const results = document.getElementById('results');
+    const hints = document.getElementById('hints');
+
 
     another_site.disabled = true;
 
@@ -30,6 +32,9 @@ $(document).ready(function() {
         const url = "/process_form/"; // {{ url for }}
         if (validate_form()){
             console.log("ok");
+            $(hints).empty();
+            $(hints).append( "Идет поиск, ждите результатов!" );
+
             // TODO если прошла валидацию то очистить ошибки
             $.ajax({
                 type: "POST",
@@ -37,12 +42,19 @@ $(document).ready(function() {
                 data: $('form').serialize(),
                 success: function (data) {
                     data.data.forEach(function (el, index) {
+                        $(hints).empty();
+                         $(hints).append( "Поиск успешно состоялся :)" );
                         $(results).empty();
                         result_element= "<p> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></p>" +
                             "<p> Найденные варианты: " + el.found_arr + "</p>";
                         $(result_element).clone().appendTo( results );
                     })
-            }
+            },
+                error: function () {
+                    $(hints).empty();
+                    $(hints).append( "Что то пошло не так :(" );
+
+                }
         });
         }
         // Не прошли валидацию
@@ -114,3 +126,4 @@ $(document).ready(function() {
 });
 
 //TODO раскидать чтоб не было повторов (хотяб в предикатах)
+//TODO стирать ошибку от селекта

@@ -130,4 +130,24 @@ select:disabled{
     letter-spacing: 2px;
 }
 
-.results
+
+#parent {
+    overflow: hidden;
+}
+.right {
+    float: right;
+    width: 20%;
+    height: 100px;
+    background: #F9F0DA;
+    padding: 2%;
+    border: 2px solid #8a9b94;
+    border-radius: 5%;
+    color: #465457;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.left {
+    overflow: hidden;
+    padding: 2%;
+}

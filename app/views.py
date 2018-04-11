@@ -39,6 +39,7 @@ def process_form():
         url = form.data['another_site']
     else:
         url = form.data['select_url']
+    print(url)
     response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
                             .format(w=form.data['search'],
                                     u=url))

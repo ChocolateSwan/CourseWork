@@ -5,13 +5,10 @@ scrapy crawl pycoder -a start_url=http://www.dmu.ac.uk
 or
 python3 ./...
 """
-import scrapy
-from scrapy.crawler import CrawlerProcess
-from urllib.parse import urljoin
-#linkextractor было
+
 from scrapy.linkextractors import LinkExtractor
 import scrapy
-from urllib.parse import urljoin
+import re
 
 
 class SpiderItem(scrapy.Item):
@@ -22,18 +19,28 @@ class SpiderItem(scrapy.Item):
 class Spider(scrapy.Spider):
     name = "spider"
     # TODO: into params
-    allowed_domains = ['htmlbook.ru']
     visited_urls = []
     result_urls = set()
 
-    # TODO: start_url to array
-    # TODO allowed domains в конструктор
-    def __init__(self, url=None, word="котел",  *args, **kwargs):
+    def __init__(self, url="", word="",  *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
-        self.start_urls = ["http://htmlbook.ru/html/table"]
-        self.word = "кон"
-        print(self.start_urls, self.word )
-        print (url, word)
+        self.start_urls = [url]
+        # TODO до ya.ru/sdsd/WE.WE
+        self.allowed_domains = re.findall(r"https?://([\S]*\.[\w]{2,3})", url) or \
+                               re.findall(r"^([\S]*\.[\w]{2,3})", url)
+        self.root = re.findall(r"https?://([\S]*)", url) or \
+                    [url]
+        self.word = word
+        print("Srart Spyder with:"
+              " \n start urls: {},"
+              " \n allowed_domains: {},"
+              " \n root: {},"
+              " \n word: {} ".format(
+                    self.start_urls,
+                    self.allowed_domains,
+                    self.root,
+                    self.word),
+              )
 
     def parse(self, response):
         print("Current url: ", response.url)
@@ -41,12 +48,8 @@ class Spider(scrapy.Spider):
         #Обработка текста
         # print(((response.body).decode()))
         resp_body = response.body.decode()
-        # print(resp_body)
-        print("результат поиска")
-        # print(*list(re.findall(r'[^>]*тел[^<]*', resp_body)), sep="\n")
-        search_results = response.xpath('//span/text()').extract()#.re(r'\w*к\w*')#.re(r'...кот...')
 
-
+        search_results = response.xpath('//p/text()').re(r'\w*' + re.escape(self.word) + r'\w*')
 
         if len(search_results):
             yield response.follow(response.url, callback=self.parse_result)
@@ -64,6 +67,7 @@ class Spider(scrapy.Spider):
             # Якоря
             extracted_urls = list(filter(lambda x: x.rfind("#") < x.rfind("/"), extracted_urls))
             extracted_urls = list(filter(lambda x: self.allowed_domains[0] in x, extracted_urls))
+            extracted_urls = list(filter(lambda x: self.root[0] in x, extracted_urls))
             # query string
             extracted_urls = list(map(lambda x: x[0:x.rfind("?")] if x.rfind("?") > x.rfind("/") else x, extracted_urls))
 
@@ -89,5 +93,9 @@ class Spider(scrapy.Spider):
         item = SpiderItem()
         item['url'] = response.url
         # TODO Сделать set а то повторы
-        item['found_arr'] = response.xpath('//p/text()').re(r'\w*элем\w*')
+        item['found_arr'] = response.xpath('//p/text()').re(r'\w*' + re.escape(self.word) + r'\w*')
+
         yield item
+
+
+ # TODO заранее собрать регулярку
