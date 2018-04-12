@@ -62,7 +62,7 @@ $(document).ready(function() {
                         console.log(data.data);
                     data.data.results.forEach(function (el, index) {
                         result_element= "<p> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></p>" +
-                            "<p> Найденные варианты: " + el.found_arr + "</p>";
+                            "<p> Найденные варианты: " + el.found_arr.join(", ") + "</p>";
                         $(result_element).clone().appendTo( results );
                     })
 

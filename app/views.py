@@ -45,12 +45,15 @@ def process_form():
     else:
         url = form.data['select_url']
 
-    print("Debug: Список слов: {w}".format(w=form.data['search']))
+    word = form.data['search']
+    word = word.replace("&", "*")
+
+    print("Debug: Список слов: {w}".format(w=word))
     print("Debug: Url: {u}".format(u=url))
 
     try:
         response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
-                                .format(w=form.data['search'],
+                                .format(w=word,
                                         u=url))
         response = response.json()
     except Exception:

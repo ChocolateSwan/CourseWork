@@ -25,6 +25,7 @@ class Spider(scrapy.Spider):
     def __init__(self, url="", word="",  *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
         self.start_urls = [url]
+        print(word, "ghjnkmhlj;")
         # TODO до ya.ru/sdsd/WE.WE
         self.allowed_domains = re.findall(r"https?://([\S]*\.[\w]{2,3})", url) or \
                                re.findall(r"^([\S]*\.[\w]{2,3})", url)
@@ -32,8 +33,8 @@ class Spider(scrapy.Spider):
                     [url]
 
         if word.find("|") == -1:
-            self.words = word.split("&")
-            self.separator = "&"
+            self.words = word.split("*")
+            self.separator = "*"
         else:
             self.words = word.split("|")
             self.separator = "|"
@@ -59,17 +60,20 @@ class Spider(scrapy.Spider):
         # print(((response.body).decode()))
         resp_body = response.body.decode()
 
-        search_results = {}
+        search_results = set()
 
+        for word in self.words:
+            iteration_results = response.xpath('//p/text()').re(r'\w*' + re.escape(word) + r'\w*')
+            if len(iteration_results) == 0 and self.separator == "*":
+                search_results.clear()
+                break
+            else:
+                search_results.update(iteration_results)
 
-        search_results = response.xpath('//p/text()').re(r'\w*' + re.escape(self.words[0]) + r'\w*')
+        print("Result set in url {} --> {}".format(response.url, search_results))
 
         if len(search_results):
             yield response.follow(response.url, callback=self.parse_result)
-            print({response.url: search_results})
-        # response.xpath('//a[contains(@href, "image")]/text()').re(r'Name:\s*(.*)')
-
-
 
         if response.url not in self.visited_urls:
             # Вытаскиваем улры со страницы
@@ -105,10 +109,21 @@ class Spider(scrapy.Spider):
     def parse_result(self, response):
         item = SpiderItem()
         item['url'] = response.url
-        # TODO Сделать set а то повторы
-        item['found_arr'] = response.xpath('//p/text()').re(r'\w*' + re.escape(self.words[0]) + r'\w*')
+
+        search_results = set()
+
+        for word in self.words:
+            iteration_results = response.xpath('//p/text()').re(r'\w*' + re.escape(word) + r'\w*')
+            if len(iteration_results) == 0 and self.separator == "*":
+                search_results.clear()
+                break
+            else:
+                search_results.update(iteration_results)
+
+        item['found_arr'] = list(search_results)
 
         yield item
 
 
  # TODO заранее собрать регулярку
+ #        TODO убрать повтор при поиске слов
