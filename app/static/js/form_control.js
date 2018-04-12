@@ -32,6 +32,10 @@ $(document).ready(function() {
         const url = "/process_form/"; // {{ url for }}
         if (validate_form()){
             console.log("ok");
+
+            $(url_error).empty();
+            $(search_error).empty();
+
             $(hints).empty();
             $(hints).append( "Идет поиск, ждите результатов!" );
 
@@ -75,6 +79,8 @@ $(document).ready(function() {
         else{
             // Если нет слов в запросе
             validate_empty_word_input();
+            // Если в строке и & и |
+            validate_and_or_words();
             // Если невалидна сязка полей список-галочка-инпут
             validate_select_checkbox_input();
             // Если в урле нету домена
@@ -93,8 +99,8 @@ $(document).ready(function() {
     });
 
     function validate_form() {
-        console.log("dv");
-        return search.value !== "" &&
+        console.log("Валидация");
+        return search.value !== "" && !(~search.value.indexOf("&") && ~search.value.indexOf("|")) &&
             (/\.\w{2,3}\/?/.test(another_site.value) && another_site.value !== "" && another_site_flag.checked ||
                 select_url.value !== "не выбрано" && !another_site_flag.checked )
 
@@ -112,6 +118,18 @@ $(document).ready(function() {
         }
     }
 
+    function validate_and_or_words() {
+        if (~search.value.indexOf("&") && ~search.value.indexOf("|")){
+            if (!~search_error.innerText.indexOf("используйте") ){
+                search_error.innerText += " [используйте либо '&' либо '|'] ";
+            }
+        }
+        else{
+            search_error.innerText =
+            search_error.innerText.replace('[используйте либо \'&\' либо \'|\']','');
+        }
+    }
+    // TODO Почему то не работает вроде
     function validate_select_checkbox_input() {
         if ((select_url.value === "не выбрано" && !another_site_flag.checked)||
             (another_site.value === "" && another_site_flag.checked)){
@@ -140,4 +158,5 @@ $(document).ready(function() {
 });
 
 //TODO раскидать чтоб не было повторов (хотяб в предикатах)
-//TODO стирать ошибку от селекта
+// TODO стирать предыдущие результаты
+// TODO проверять на пустоту между | или &

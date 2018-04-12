@@ -30,16 +30,26 @@ class Spider(scrapy.Spider):
                                re.findall(r"^([\S]*\.[\w]{2,3})", url)
         self.root = re.findall(r"https?://([\S]*)", url) or \
                     [url]
-        self.word = word
+
+        if word.find("|") == -1:
+            self.words = word.split("&")
+            self.separator = "&"
+        else:
+            self.words = word.split("|")
+            self.separator = "|"
+
+
         print("Srart Spyder with:"
               " \n start urls: {},"
               " \n allowed_domains: {},"
-              " \n root: {},"
-              " \n word: {} ".format(
+              " \n root: {}, "
+              " \n separator: {}"
+              " \n words: {} ".format(
                     self.start_urls,
                     self.allowed_domains,
                     self.root,
-                    self.word),
+                    self.separator,
+                    self.words),
               )
 
     def parse(self, response):
@@ -49,7 +59,10 @@ class Spider(scrapy.Spider):
         # print(((response.body).decode()))
         resp_body = response.body.decode()
 
-        search_results = response.xpath('//p/text()').re(r'\w*' + re.escape(self.word) + r'\w*')
+        search_results = {}
+
+
+        search_results = response.xpath('//p/text()').re(r'\w*' + re.escape(self.words[0]) + r'\w*')
 
         if len(search_results):
             yield response.follow(response.url, callback=self.parse_result)
@@ -93,7 +106,7 @@ class Spider(scrapy.Spider):
         item = SpiderItem()
         item['url'] = response.url
         # TODO Сделать set а то повторы
-        item['found_arr'] = response.xpath('//p/text()').re(r'\w*' + re.escape(self.word) + r'\w*')
+        item['found_arr'] = response.xpath('//p/text()').re(r'\w*' + re.escape(self.words[0]) + r'\w*')
 
         yield item
 

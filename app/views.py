@@ -37,11 +37,16 @@ def search():
 @app.route('/process_form/', methods=['post'])
 def process_form():
     form = SearchForm()
+    # Слова
+
     # TODO переписать иф покороче
     if form.data['another_site_flag']:
         url = form.data['another_site']
     else:
         url = form.data['select_url']
+
+    print("Debug: Список слов: {w}".format(w=form.data['search']))
+    print("Debug: Url: {u}".format(u=url))
 
     try:
         response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
