@@ -41,14 +41,28 @@ $(document).ready(function() {
                 url: url,
                 data: $('form').serialize(),
                 success: function (data) {
-                    data.data.forEach(function (el, index) {
-                        $(hints).empty();
-                         $(hints).append( "Поиск успешно состоялся :)" );
+                    $(hints).empty();
+
+                        $(hints).append(data.data.message);
+
+
+                         // if (data.data.synonyms.length !== 0){
+                         //    $(hints).append(
+                         //        "Слишком мало совпадений! Попробуйте: " + data.data.synonyms.join(', '));
+                         // } else {
+                         //     $(hints).append( "Поиск успешно состоялся :)" );
+                         // }
+
+
                         $(results).empty();
+                        console.log(data.data);
+                    data.data.results.forEach(function (el, index) {
                         result_element= "<p> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></p>" +
                             "<p> Найденные варианты: " + el.found_arr + "</p>";
                         $(result_element).clone().appendTo( results );
                     })
+
+
             },
                 error: function () {
                     $(hints).empty();

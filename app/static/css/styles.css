@@ -137,7 +137,7 @@ select:disabled{
 .right {
     float: right;
     width: 20%;
-    height: 100px;
+    /*height: 100px;*/
     background: #F9F0DA;
     padding: 2%;
     border: 2px solid #8a9b94;

@@ -12,7 +12,7 @@ class SearchForm(FlaskForm):
     # TODO choices as list
     select_url = SelectField(u'выбрать сайт для поиска',
                              # TODO тестовый сайт убрать
-                             choices=[('не выбрано', 'не выбрано')] + list(map(lambda p: (p['url'], p['название']), PROGRAMS)) + [('http://htmlbook.ru/html/table', 'test')]
+                             choices=[('не выбрано', 'не выбрано')] + list(map(lambda p: (p['url'], p['название']), PROGRAMS)) + [('http://htmlbook.ru/html/table', 'test rus'),('https://www.python.org', 'test eng') ]
                              ,)
     another_site_flag = BooleanField('другой сайт',render_kw={"class": "checkbox-hidden"})
     another_site = StringField('сайт не из списка',
