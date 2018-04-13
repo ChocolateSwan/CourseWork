@@ -59,22 +59,24 @@ def process_form():
     except Exception:
         print("Error: Сервис Scrapy недоступен или неправильный URL!")
         response = []
-        synonyms = []
         message = "Сайт недоступен или произошли непредвиденные обстоятельства :( "
         return jsonify(data={
             'results': response,
             'message': message,
         })
 
+    words = word.split("*") if word.find("|") == -1 \
+        else word.split("|")
+
     if response:
         sum_resp = reduce(lambda s,el: s + el,
                      list(map(lambda el: len(el['found_arr']), response)))
         print("Debug: Всего от Scrapy {sum} совпадений.".format(sum=sum_resp))
-        synonyms = []
         if sum_resp < MIN_COUNT:
-            synonyms = find_synonyms(form.data['search'])
+            synonyms = find_synonyms(words)
             if synonyms:
-                message = "Слишком мало совпадений! Попробуйте: " + ", ".join(synonyms)
+                message = "Слишком мало совпадений! Найдены синонимы. Попробуйте: " + \
+                          "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),synonyms)))
             else:
                 message = "Слишком мало совпадений, но к вашему слову не найдено ни одного синонима :(" \
                           " Попробуйте ввести другое слово"
@@ -93,9 +95,10 @@ def process_form():
                 'message': message,
             })
 
-        synonyms = find_synonyms(form.data['search'])
+        synonyms = find_synonyms(words)
         if synonyms:
-            message = "Не найдено ни одного совпадения! Попробуйте: " + ", ".join(synonyms)
+            message = "Не найдено ни одного совпадения! Найдены синонимы. Попробуйте: " \
+                      + "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),synonyms)))
         else:
             message = "Проверьте написание вашего слова! Возможно оно написано неверно" \
                       " или у него нет синонимов :("

@@ -35,6 +35,7 @@ form {
     outline: none;
     background: #F9F0DA;
     color: #050201;
+    font-size: 19px;
 }
 
 .form-input:disabled{
@@ -136,7 +137,7 @@ select:disabled{
 }
 .right {
     float: right;
-    width: 20%;
+    width: 30%;
     /*height: 100px;*/
     background: #F9F0DA;
     padding: 2%;
