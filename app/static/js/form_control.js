@@ -155,6 +155,23 @@ $(document).ready(function() {
         }
 
     }
+
+    const infobtn = document.getElementById('info-btn');
+    const info = document.getElementById('info');
+    $(infobtn).click(function (e) {
+        e.preventDefault();
+        if ($(info).is(":visible")){
+          $(info).hide("fast");
+          $(infobtn).val("справка "+$("<div>").html("&#9660;").text())
+
+        }
+        else {
+         $(info).show("fast");
+         $(infobtn).val("справка "+$("<div>").html("&#9650;").text())
+        }
+
+
+    })
 });
 
 //TODO раскидать чтоб не было повторов (хотяб в предикатах)

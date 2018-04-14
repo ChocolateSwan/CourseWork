@@ -8,13 +8,17 @@ from .program_dict import PROGRAMS
 
 class SearchForm(FlaskForm):
     search = StringField('слова для поиска', validators=[DataRequired("Не пустое")],
-                         render_kw={"class": "form-input form-input-width-100"})
+                         render_kw={"class": "form-input form-input-width-60", "placeholder": "слова через & или |"})
+
+    unwanted_words = StringField('нежелательные слова',
+                         render_kw={"class": "form-input form-input-width-30 margin-left-1","placeholder": "нежелательные слова"})
+
     # TODO choices as list
     select_url = SelectField(u'выбрать сайт для поиска',
                              # TODO тестовый сайт убрать
-                             choices=[('не выбрано', 'не выбрано')] + list(map(lambda p: (p['url'], p['название']), PROGRAMS)) + [('http://htmlbook.ru/html/table', 'test rus'),('https://www.python.org', 'test eng') ]
+                             choices=[('не выбрано', 'сайт не выбран')] + list(map(lambda p: (p['url'], p['название']), PROGRAMS)) + [('http://htmlbook.ru/html/table', 'test rus'),('https://www.python.org', 'test eng') ]
                              ,)
     another_site_flag = BooleanField('другой сайт',render_kw={"class": "checkbox-hidden"})
     another_site = StringField('сайт не из списка',
-                               render_kw={"class": "form-input form-input-width-50"})#, render_kw={'disabled':''},
+                               render_kw={"class": "form-input form-input-width-50", "placeholder": "адрес сайта не из списка"})#, render_kw={'disabled':''},
     search_btn = SubmitField('Искать', render_kw={"class": "form-btn"})
