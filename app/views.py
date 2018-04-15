@@ -48,13 +48,17 @@ def process_form():
     word = form.data['search']
     word = word.replace("&", "*")
 
+    unwanted_words = form.data['unwanted_words']
+
     print("Debug: Список слов: {w}".format(w=word))
     print("Debug: Url: {u}".format(u=url))
+    print("Debug: Нежелательные слова: {u}".format(u=unwanted_words))
 
     try:
-        response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
+        response = requests.get('http://127.0.0.1:8900/?word={w}&url={url}&qq=jdncdjsv'
                                 .format(w=word,
-                                        u=url))
+                                        url=url, d="jnjsecsv"))
+        # TODO фильтровать по не пустому found arr
         response = response.json()
     except Exception:
         print("Error: Сервис Scrapy недоступен или неправильный URL!")

@@ -8,7 +8,8 @@ $(document).ready(function() {
     const url_error = document.getElementById('url_error');
     const results = document.getElementById('results');
     const hints = document.getElementById('hints');
-
+    const infobtn = document.getElementById('info-btn');
+    const info = document.getElementById('info');
 
     another_site.disabled = true;
 
@@ -29,7 +30,7 @@ $(document).ready(function() {
 
     $('form').submit(function (e) {
         e.preventDefault();
-        const url = "/process_form/"; // {{ url for }}
+        const url = "/process_form/";
         if (validate_form()){
             console.log("ok");
 
@@ -39,7 +40,10 @@ $(document).ready(function() {
             $(hints).empty();
             $(hints).append( "Идет поиск, ждите результатов!" );
 
-            // TODO если прошла валидацию то очистить ошибки
+            // TODO может надо убрать
+            $(results).empty();
+            $(results).append( "Тут будет поисковая выдача" );
+
             $.ajax({
                 type: "POST",
                 url: url,
@@ -49,22 +53,13 @@ $(document).ready(function() {
 
                         $(hints).append(data.data.message);
 
-
-                         // if (data.data.synonyms.length !== 0){
-                         //    $(hints).append(
-                         //        "Слишком мало совпадений! Попробуйте: " + data.data.synonyms.join(', '));
-                         // } else {
-                         //     $(hints).append( "Поиск успешно состоялся :)" );
-                         // }
-
-
                         $(results).empty();
                         console.log(data.data);
-                    data.data.results.forEach(function (el, index) {
-                        result_element= "<p> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></p>" +
-                            "<p> Найденные варианты: " + el.found_arr.join(", ") + "</p>";
-                        $(result_element).clone().appendTo( results );
-                    })
+                        data.data.results.forEach(function (el, index) {
+                            result_element= "<span> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a></span>" +
+                                "<br><span> Найденные варианты: " + el.found_arr.join(", ") + "</span> <br>";
+                            $(result_element).clone().appendTo( results );
+                        })
 
 
             },
@@ -156,8 +151,6 @@ $(document).ready(function() {
 
     }
 
-    const infobtn = document.getElementById('info-btn');
-    const info = document.getElementById('info');
     $(infobtn).click(function (e) {
         e.preventDefault();
         if ($(info).is(":visible")){

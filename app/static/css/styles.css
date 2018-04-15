@@ -1,4 +1,4 @@
-/*TODO стрелка у select (arrow), select options, выровнять checkbox, стиль ошибок*/
+/*TODO вторая строчка формы не резиновая, стиль ошибок*/
 
 :root {
     --line-color: #1000b2;
@@ -30,8 +30,9 @@ h3 {
 
 form {
     position: relative;
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
+
 }
 
 .form-input {
@@ -60,7 +61,7 @@ form {
 }
 
 .form-input-width-50{
-        width: 50%;
+        width: 40%;
 }
 
 .margin-left-1{
@@ -132,6 +133,8 @@ select {
     color: #333;
     font: 20px/1em sans-serif;
     outline:none;
+    width: 40%;
+    padding-left: 1%;
 }
 
 select:disabled{
@@ -204,10 +207,11 @@ select option {
     padding: 10px;
     text-align: center;
     display: none;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 footer{
     border-top:1px solid var(--line-color);
 
 }
+

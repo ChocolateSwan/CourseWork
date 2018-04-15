@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Поиск</title>
+    <title>Диплом</title>
     <link href="/static/css/styles.css" rel="stylesheet" media="screen">
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="/static/js/form_control.js"></script>
@@ -15,17 +15,17 @@
 
     <div class="parent">
             <input value="справка &#9660;" class="info-btn" id ="info-btn"  >
-    <div class="info" id="info">
-        В поле ввода слов вводятся слова следующими способами: через & - пересечение, через | -объединение.
-        <br>
-        В поле справа можно ввести слова, которые не должны появляться на выданных страницах.
-        <br>
-        Есть возможность выбрать сайт для поиска из списка или ввести собственный адрес сайта,
-        поставив галочку в поле "другой сайт".
-        <br>
-        После отправки поскового запроса в окошке справа начнут выводиться подсказки, и под формой слева будет
-        показана поисковая выдача.
-    </div>
+        <div class="info" id="info">
+            В поле ввода слов вводятся слова следующими способами: через & - пересечение, через | -объединение.
+            <br>
+            В поле справа можно ввести слова, которые не должны появляться на выданных страницах.
+            <br>
+            Есть возможность выбрать сайт для поиска из списка или ввести собственный адрес сайта,
+            поставив галочку в поле "другой сайт".
+            <br>
+            После отправки поскового запроса в окошке справа начнут выводиться подсказки, и под формой слева будет
+            показана поисковая выдача.
+        </div>
     </div>
 
 
@@ -33,15 +33,15 @@
         {{ form.hidden_tag() }}
         <div>
             <p>
-        <span>
-            {{ form.search() }}
-        </span>
-            <span>
-            {{form.unwanted_words}}
-            </span>
-            <span id="search_error" style="color: red;">
-            </span>
-        </p>
+                <span>
+                    {{ form.search() }}
+                </span>
+                <span>
+                    {{form.unwanted_words}}
+                </span>
+                <span id="search_error" style="color: red;">
+                </span>
+            </p>
         </div>
         <div>
             <span>
@@ -54,7 +54,7 @@
             <span>
                 {{ form.another_site() }}
             </span>
-            <span id="url_error" style="color: red; ">
+            <span id="url_error" style="color: red;">
             </span>
         </div>
         <div style=" width:100%;display:inline-block;">
@@ -64,13 +64,10 @@
         </div>
     </form>
 
-
 <div id="parent">
     <div class="right" id="hints">Тут будут подсказки</div>
     <div class="left results" id="results"> Тут будет поисковая выдача</div>
 </div>
-
-
 
   <!--<footer>-->
     <!--Сурикова Ольга, ИУ5-84, МГТУ им.Н.Э.Баумана-->
@@ -79,6 +76,3 @@
 </body>
 
 </html>
-
-
-<!--TODO лажает при перезагрузке-->
