@@ -50,9 +50,12 @@ def schedule(request):
     print(request.args[b"url"][0])
     url = request.args[b"url"][0]
     url = url.decode('utf-8')
+    unwanted = request.args[b"unwanted"][0]
+    unwanted = unwanted.decode('utf-8')
+    print(unwanted)
     runner = MyCrawlerRunner() #{"FEED_EXPORT_ENCODING":'utf-8'}
     spider = Spider() # Зачем он заходит в инит в этой строке и в строке dfd = self._crawl(crawler, *args, **kwargs)
-    deferred = runner.crawl(spider, word=word, url=url)
+    deferred = runner.crawl(spider, word=word, url=url, unwanted=unwanted)
     deferred.addCallback(return_spider_output)
     return deferred
 

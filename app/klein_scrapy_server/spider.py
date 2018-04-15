@@ -9,6 +9,7 @@ python3 ./...
 from scrapy.linkextractors import LinkExtractor
 import scrapy
 import re
+from spyder_utils import print_spider_info, find_words_on_page
 
 
 class SpiderItem(scrapy.Item):
@@ -20,7 +21,7 @@ class SpiderItem(scrapy.Item):
 class Spider(scrapy.Spider):
     name = "spider"
 
-    def __init__(self, url="", word="", qq="", *args, **kwargs):
+    def __init__(self, url="", word="", unwanted="", *args, **kwargs):
         super(Spider, self).__init__(*args, **kwargs)
         self.start_urls = [url]
 
@@ -38,38 +39,29 @@ class Spider(scrapy.Spider):
             self.separator = "|"
 
         self.result_urls = set()
-        print("cmdjcndj",qq)
+        self.unwanted = unwanted.split()
 
-        print("Start Spyder with:"
-              " \n start urls: {},"
-              " \n allowed_domains: {},"
-              " \n root: {}, "
-              " \n separator: {}"
-              " \n words: {} ".format(
-                    self.start_urls,
-                    self.allowed_domains,
-                    self.root,
-                    self.separator,
-                    self.words),
-              )
+        print_spider_info(self.start_urls, self.allowed_domains,
+        self.root, self.separator, self.words, self.unwanted)
+
 
     def parse(self, response):
+
         print("Current url: ", response.url)
 
-        # search_results = set()
+        has_unwanted_word = False
+
+        # TODO по факту тут не надо искать по ссылкам и тд но хз
+        for unwanted_word in self.unwanted:
+            iteration_results = find_words_on_page(response, unwanted_word)
+            if iteration_results:
+                has_unwanted_word = True
+                break
+
+        print("Has unwanted words: {}".format(has_unwanted_word))
         #
-        # for word in self.words:
-        #     iteration_results = response.xpath('//p/text()').re(r'\w*' + re.escape(word) + r'\w*')
-        #     if len(iteration_results) == 0 and self.separator == "*":
-        #         search_results.clear()
-        #         break
-        #     else:
-        #         search_results.update(iteration_results)
-        #
-        # print("Result set in url {} --> {}".format(response.url, search_results))
-        #
-        # if len(search_results):
-        yield response.follow(response.url, callback=self.parse_url)
+        if not has_unwanted_word:
+            yield response.follow(response.url, callback=self.parse_url)
 
 
         # Вытаскиваем улры со страницы
@@ -108,16 +100,7 @@ class Spider(scrapy.Spider):
         search_results = set()
 
         for word in self.words:
-            reg_exp = r'\w*['+ re.escape(word[0].upper()) + \
-                      re.escape(word[0].lower())+ "]" + \
-                      re.escape(word[1:len(word)]) + r'\w*'
-            iteration_results = response.xpath('//p/text()').re(reg_exp)
-            iteration_results.extend(response.xpath('//li/text()').re(reg_exp))
-            iteration_results.extend(response.xpath('//a/text()').re(reg_exp))
-            iteration_results.extend(response.xpath('//span/text()').re(reg_exp))
-            iteration_results.extend(response.xpath('//h1/text()').re(reg_exp))
-            iteration_results.extend(response.xpath('//h2/text()').re(reg_exp))
-            iteration_results.extend(response.xpath('//h3/text()').re(reg_exp))
+            iteration_results = find_words_on_page(response, word)
 
             if len(iteration_results) == 0 and self.separator == "*":
                 search_results.clear()
@@ -128,6 +111,3 @@ class Spider(scrapy.Spider):
         item['found_arr'] = list(search_results)
         item['count'] = len(search_results)
         yield item
-
-
- # TODO заранее собрать регулярку

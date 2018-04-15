@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, flash, jsonify, request
 from app.forms import SearchForm
 import requests
-from test_files.lang_module import find_synonyms
+from test_files.lang_module import find_synonyms, find_antonyms
 from functools import reduce
 from test_files.utils import cut_found_arr
 
@@ -21,7 +21,6 @@ def search():
 @app.route('/process_form/', methods=['post'])
 def process_form():
     form = SearchForm()
-    # Слова
 
     # TODO переписать иф покороче
     if form.data['another_site_flag']:
@@ -39,9 +38,10 @@ def process_form():
     print("Debug: Нежелательные слова: {u}".format(u=unwanted_words))
 
     try:
-        response = requests.get('http://127.0.0.1:8900/?word={w}&url={url}'
+        response = requests.get('http://127.0.0.1:8900/?&word={w}&url={url}&unwanted={uw}'
                                 .format(w=word,
-                                        url=url))
+                                        url=url,
+                                        uw=unwanted_words))
         # TODO фильтровать по не пустому found arr !!!!!!!!!!!!!!!!!!!!!
         response = response.json()
     except Exception:
@@ -94,7 +94,6 @@ def process_form():
         else:
             message = "Проверьте написание вашего слова! Возможно оно написано неверно" \
                       " или у него нет синонимов :("
-
 
     return jsonify(data={
         'results': response,

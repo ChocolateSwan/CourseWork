@@ -11,9 +11,10 @@ def find_synonyms(words):
     result = list(map (lambda el: {"word":el, "synonyms" :dictionary.synonym(el)}, words))
     return list(filter(lambda el: el['synonyms'], result))
 
-def find_antonyms(words):
 
-    print(dictionary.antonym("Life"))
+def find_antonyms(words):
+    result = list(map(lambda el: {"word": el, "antonyms": dictionary.antonym(el)}, words))
+    return list(filter(lambda el: el['antonyms'], result))
 
 
 def has_cyrillic_symb(word):
