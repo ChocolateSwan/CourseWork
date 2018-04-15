@@ -55,17 +55,16 @@ def process_form():
     print("Debug: Нежелательные слова: {u}".format(u=unwanted_words))
 
     try:
-        response = requests.get('http://127.0.0.1:8900/?word={w}&url={url}&qq=jdncdjsv'
+        response = requests.get('http://127.0.0.1:8900/?word={w}&url={url}'
                                 .format(w=word,
-                                        url=url, d="jnjsecsv"))
-        # TODO фильтровать по не пустому found arr
+                                        url=url))
+        # TODO фильтровать по не пустому found arr !!!!!!!!!!!!!!!!!!!!!
         response = response.json()
     except Exception:
         print("Error: Сервис Scrapy недоступен или неправильный URL!")
-        response = []
         message = "Сайт недоступен или произошли непредвиденные обстоятельства :( "
         return jsonify(data={
-            'results': response,
+            'results': [],
             'message': message,
         })
 
@@ -73,16 +72,19 @@ def process_form():
         else word.split("|")
 
     if response:
-        sum_resp = reduce(lambda s,el: s + el,
+        sum_all_resp = reduce(lambda s, el: s + el,
                      list(map(lambda el: len(el['found_arr']), response)))
-        print("Debug: Всего от Scrapy {sum} совпадений.".format(sum=sum_resp))
-        if sum_resp < MIN_COUNT:
+
+        print("Debug: Всего от Scrapy {sum} совпадений.".format(sum=sum_all_resp))
+
+        if sum_all_resp < MIN_COUNT:
             synonyms = find_synonyms(words)
             if synonyms:
-                message = "Слишком мало совпадений! Найдены синонимы. Попробуйте: " + \
+
+                message = "Найдено всего {} совпадений(я). Это очень мало, но найдены синонимы. Попробуйте: <br>".format(sum_all_resp) + \
                           "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),synonyms)))
             else:
-                message = "Слишком мало совпадений, но к вашему слову не найдено ни одного синонима :(" \
+                message = "Слишком мало совпадений ({}), и к вашему слову не найдено ни одного синонима :(".format(sum_all_resp) +\
                           " Попробуйте ввести другое слово"
         else:
             message = "Отлично! Поиск успешно состоялся :)"
@@ -101,7 +103,7 @@ def process_form():
 
         synonyms = find_synonyms(words)
         if synonyms:
-            message = "Не найдено ни одного совпадения! Найдены синонимы. Попробуйте: " \
+            message = "Не найдено ни одного совпадения, но найдены синонимы. Попробуйте: <br> " \
                       + "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),synonyms)))
         else:
             message = "Проверьте написание вашего слова! Возможно оно написано неверно" \
