@@ -57,7 +57,7 @@ $(document).ready(function() {
                         console.log(data.data);
                         data.data.results.forEach(function (el, index) {
                             result_element= "<span> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a> - найдено " +
-                                + el.found_arr.length + " вариантов(а) </span>" +
+                                + el.count + " вариантов(а) </span>" +
                                 "<br><span> Найденные варианты: " + el.found_arr.join(", ") + "</span> <br>";
                             $(result_element).clone().appendTo( results );
                         })

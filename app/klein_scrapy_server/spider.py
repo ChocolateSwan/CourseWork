@@ -14,6 +14,7 @@ import re
 class SpiderItem(scrapy.Item):
     url = scrapy.Field()
     found_arr = scrapy.Field()
+    count = scrapy.Field()
 
 
 class Spider(scrapy.Spider):
@@ -125,7 +126,7 @@ class Spider(scrapy.Spider):
                 search_results.update(iteration_results)
 
         item['found_arr'] = list(search_results)
-
+        item['count'] = len(search_results)
         yield item
 
 

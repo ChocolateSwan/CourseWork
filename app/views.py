@@ -4,29 +4,13 @@ from app.forms import SearchForm
 import requests
 from test_files.lang_module import find_synonyms
 from functools import reduce
+from test_files.utils import cut_found_arr
 
 MIN_COUNT = 5
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET',"POST"])
 def search():
     form = SearchForm() # csrf_enabled=False
-    print(form.data)
-    if form.validate_on_submit():
-        # TODO анализ несколько слов
-        # TODO подсказки
-        # TODO переписать иф покороче
-        if form.data['another_site_flag']:
-            url = form.data['another_site']
-        else:
-            url = form.data['select_url']
-        response = requests.get('http://127.0.0.1:8900/?word={w}&url={u}'
-                                .format(w=form.data['search'],
-                                        u=url))
-        print(response.json())
-        flash('Поиск удался =)')
-        return render_template("index.html",
-                        form = form,
-                        results = response.json())
     return render_template("index.html",
                            form=form,
                            results="не было поиска")
@@ -73,7 +57,7 @@ def process_form():
 
     if response:
         sum_all_resp = reduce(lambda s, el: s + el,
-                     list(map(lambda el: len(el['found_arr']), response)))
+                     list(map(lambda el: el['count'], response)))
 
         print("Debug: Всего от Scrapy {sum} совпадений.".format(sum=sum_all_resp))
 
@@ -87,6 +71,8 @@ def process_form():
                 message = "Слишком мало совпадений ({}), и к вашему слову не найдено ни одного синонима :(".format(sum_all_resp) +\
                           " Попробуйте ввести другое слово"
         else:
+            response = list(map(lambda x: cut_found_arr(x), response))
+
             message = "Отлично! Поиск успешно состоялся :)"
 
     else:
@@ -114,3 +100,4 @@ def process_form():
         'results': response,
         'message': message,
     })
+
