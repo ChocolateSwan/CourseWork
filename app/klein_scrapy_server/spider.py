@@ -55,7 +55,7 @@ class Spider(scrapy.Spider):
         url_without_scheme = re.findall(r"https?://([\w/.-]*)", response.url)[0]
 
         if url_without_scheme not in self.visited_urls:
-            print("Current url: ", response.url)
+            # print("Current url: ", response.url)
 
             self.result_urls.add(response.url)
             self.visited_urls.add(url_without_scheme)
@@ -69,7 +69,7 @@ class Spider(scrapy.Spider):
                     has_unwanted_word = True
                     break
 
-            print("Has unwanted words: {}".format(has_unwanted_word))
+            # print("Has unwanted words: {}".format(has_unwanted_word))
 
             if not has_unwanted_word:
                 item = SpiderItem()

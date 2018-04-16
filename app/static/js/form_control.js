@@ -60,13 +60,22 @@ $(document).ready(function() {
                                 + el.count + " вариантов(а) </span>" +
                                 "<br><span> Найденные варианты: " + el.found_arr.join(", ") + "</span> <br> <br>";
                             $(result_element).clone().appendTo( results );
-                        })
+                        });
+                    // ФУФУФУ
+                    if (!data.data.results.length){
+                        $(results).empty();
+                        $(results).append( "Поиск не дал результатов" );
+
+                    }
 
 
             },
                 error: function () {
                     $(hints).empty();
                     $(hints).append( "Что то пошло не так :(" );
+                    $(results).empty();
+                    $(results).append( "Поиск не дал результатов" );
+
 
                 }
         });

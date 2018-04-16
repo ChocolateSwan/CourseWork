@@ -7,7 +7,7 @@ from functools import reduce
 from test_files.utils import cut_found_arr
 from .program_dict import PROGRAMS
 
-MIN_COUNT = 5
+MIN_COUNT = 20
 
 @app.route('/', methods=['GET',"POST"])
 def search():
@@ -35,8 +35,6 @@ def process_form():
         except:
             url = url
 
-
-
     word = form.data['search']
     word = word.replace("&", "*")
 
@@ -52,7 +50,6 @@ def process_form():
                                         url=url,
                                         uw=unwanted_words))
         response = response.json()
-        print(response)
         response = list(filter(lambda x: x["found_arr"], response))
     except Exception:
         print("Error: Сервис Scrapy недоступен или неправильный URL!")
@@ -78,12 +75,12 @@ def process_form():
                 message = "Найдено всего {} совпадений(я). Это очень мало, но найдены синонимы. Попробуйте: <br>".format(sum_all_resp) + \
                           "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),synonyms)))
             else:
-                message = "Слишком мало совпадений ({}), и к вашему слову не найдено ни одного синонима :(".format(sum_all_resp) +\
-                          " Попробуйте ввести другое слово"
+                message = "Слишком мало совпадений ({}), и к вашему слову не найдено ни одного синонима :(".format(sum_all_resp)
+
         else:
             response = list(map(lambda x: cut_found_arr(x), response))
 
-            message = "Отлично! Поиск успешно состоялся :)"
+            message = "Отлично! Поиск успешно состоялся - найдено {} совпадений!".format(sum_all_resp)
 
     else:
 
