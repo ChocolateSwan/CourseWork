@@ -5,6 +5,7 @@ import requests
 from test_files.lang_module import find_synonyms, find_antonyms
 from functools import reduce
 from test_files.utils import cut_found_arr
+from .program_dict import PROGRAMS
 
 MIN_COUNT = 5
 
@@ -27,6 +28,14 @@ def process_form():
         url = form.data['another_site']
     else:
         url = form.data['select_url']
+        program = list(filter(lambda x: x["url"] == url,PROGRAMS))
+        print(program)
+        try:
+            url = program[0]['программы']
+        except:
+            url = url
+
+
 
     word = form.data['search']
     word = word.replace("&", "*")
@@ -42,8 +51,9 @@ def process_form():
                                 .format(w=word,
                                         url=url,
                                         uw=unwanted_words))
-        # TODO фильтровать по не пустому found arr !!!!!!!!!!!!!!!!!!!!!
         response = response.json()
+        print(response)
+        response = list(filter(lambda x: x["found_arr"], response))
     except Exception:
         print("Error: Сервис Scrapy недоступен или неправильный URL!")
         message = "Сайт недоступен или произошли непредвиденные обстоятельства :( "

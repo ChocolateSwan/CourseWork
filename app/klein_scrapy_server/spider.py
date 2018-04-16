@@ -5,6 +5,7 @@ scrapy crawl pycoder -a start_url=http://www.dmu.ac.uk
 or
 python3 ./...
 """
+# TODO убрать херь с массивами, их слишком много!!!!!
 
 from scrapy.linkextractors import LinkExtractor
 import scrapy
@@ -26,10 +27,12 @@ class Spider(scrapy.Spider):
         self.start_urls = [url]
 
         # TODO до ya.ru/sdsd/WE.WE
-        self.allowed_domains = re.findall(r"https?://([\S]*\.[\w]{2,3})", url) or \
-                               re.findall(r"^([\S]*\.[\w]{2,3})", url)
+        self.allowed_domains = re.findall(r"https?://([^/]*\.[\w]{2,3})", url) or \
+                               re.findall(r"^([^/]*\.[\w]{2,3})", url)
         self.root = re.findall(r"https?://([\S]*)", url) or \
                     [url]
+
+        # self.root = ["www.dmu.ac.uk/study/courses/postgraduate-courses/"]
 
         if word.find("|") == -1:
             self.words = word.split("*")
@@ -39,6 +42,8 @@ class Spider(scrapy.Spider):
             self.separator = "|"
 
         self.result_urls = set()
+        self.visited_urls = set()
+
         self.unwanted = unwanted.split()
 
         print_spider_info(self.start_urls, self.allowed_domains,
@@ -47,67 +52,66 @@ class Spider(scrapy.Spider):
 
     def parse(self, response):
 
-        print("Current url: ", response.url)
+        url_without_scheme = re.findall(r"https?://([\w/.-]*)", response.url)[0]
 
-        has_unwanted_word = False
+        if url_without_scheme not in self.visited_urls:
+            print("Current url: ", response.url)
 
-        # TODO по факту тут не надо искать по ссылкам и тд но хз
-        for unwanted_word in self.unwanted:
-            iteration_results = find_words_on_page(response, unwanted_word)
-            if iteration_results:
-                has_unwanted_word = True
-                break
+            self.result_urls.add(response.url)
+            self.visited_urls.add(url_without_scheme)
 
-        print("Has unwanted words: {}".format(has_unwanted_word))
-        #
-        if not has_unwanted_word:
-            yield response.follow(response.url, callback=self.parse_url)
+            has_unwanted_word = False
 
+            # TODO по факту тут не надо искать по ссылкам и тд но хз
+            for unwanted_word in self.unwanted:
+                iteration_results = find_words_on_page(response, unwanted_word)
+                if iteration_results:
+                    has_unwanted_word = True
+                    break
 
-        # Вытаскиваем улры со страницы
-        link_extractor = LinkExtractor()
-        extracted_urls = link_extractor.extract_links(response)
-        extracted_urls = list(map(lambda link: link.url, extracted_urls))
+            print("Has unwanted words: {}".format(has_unwanted_word))
 
-        # Якоря
-        extracted_urls = list(filter(lambda x: x.rfind("#") < x.rfind("/"), extracted_urls))
-        extracted_urls = list(filter(lambda x: self.allowed_domains[0] in x, extracted_urls))
-        extracted_urls = list(filter(lambda x: self.root[0] in x, extracted_urls))
-        # query string
-        extracted_urls = list(map(lambda x: x[0:x.rfind("?")] if x.rfind("?") > x.rfind("/") else x, extracted_urls))
+            if not has_unwanted_word:
+                item = SpiderItem()
+                item['url'] = response.url
 
-        # study in url!!!!!!!!!!!!!!!!!!
-        # extracted_urls = list(filter(lambda x: "study" in x, extracted_urls))
+                search_results = set()
 
-        # TODO query string, lowercase
-        # print(len(extracted_urls))
-        # for url in extracted_urls:
-        #     print(url)
+                for word in self.words:
+                    iteration_results = find_words_on_page(response, word)
 
-        diff = set(extracted_urls).difference(self.result_urls)
+                    if len(iteration_results) == 0 and self.separator == "*":
+                        search_results.clear()
+                        break
+                    else:
+                        search_results.update(iteration_results)
 
-        self.result_urls.update(diff)
+                item['found_arr'] = list(search_results)
+                item['count'] = len(search_results)
+                yield item
 
 
-# Раскомментировать!!!!!!!!!!
-            # for url in list(diff):
-            #     yield response.follow(url, callback=self.parse)
 
-    def parse_url(self, response):
-        item = SpiderItem()
-        item['url'] = response.url
+            # Вытаскиваем улры со страницы
+            link_extractor = LinkExtractor()
+            extracted_urls = link_extractor.extract_links(response)
+            extracted_urls = list(map(lambda link: link.url, extracted_urls))
 
-        search_results = set()
+            # Якоря
+            extracted_urls = list(filter(lambda x: x.rfind("#") < x.rfind("/"), extracted_urls))
+            extracted_urls = list(filter(lambda x: self.allowed_domains[0] in x, extracted_urls))
+            extracted_urls = list(filter(lambda x: self.root[0] in x, extracted_urls))
+            # query string
+            extracted_urls = list(map(lambda x: x[0:x.rfind("?")] if x.rfind("?") > x.rfind("/") else x, extracted_urls))
 
-        for word in self.words:
-            iteration_results = find_words_on_page(response, word)
+            # TODO query string, lowercase
+    #
+            diff = set(extracted_urls).difference(self.result_urls)
 
-            if len(iteration_results) == 0 and self.separator == "*":
-                search_results.clear()
-                break
-            else:
-                search_results.update(iteration_results)
+            self.result_urls.update(diff)
 
-        item['found_arr'] = list(search_results)
-        item['count'] = len(search_results)
-        yield item
+
+    # Раскомментировать!!!!!!!!!!
+            for url in list(diff):
+                yield response.follow(url, callback=self.parse)
+

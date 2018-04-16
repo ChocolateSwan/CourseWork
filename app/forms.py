@@ -11,7 +11,7 @@ class SearchForm(FlaskForm):
                          render_kw={"class": "form-input form-input-width-60", "placeholder": "слова через & или |"})
 
     unwanted_words = StringField('нежелательные слова',
-                         render_kw={"class": "form-input form-input-width-30 margin-left-1","placeholder": "нежелательные слова"})
+                         render_kw={"class": "form-input form-input-width-30 margin-left-1","placeholder": "нежелательные термины"})
 
     # TODO choices as list
     select_url = SelectField(u'выбрать сайт для поиска',

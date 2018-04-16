@@ -4,14 +4,14 @@ PROGRAMS = [
         "название": "Университет де Монфорт",
         "страна": "Великобритания",
         "язык": "en",
-        "программы":"http://www.dmu.ac.uk/study/"
+        "программы":"http://www.dmu.ac.uk/study/courses/postgraduate-courses"
     },
         {
-        "url": "https://www.northumbria.ac.uk",
-        "название": "Университет Нортумбрии",
+        "url": "https://www.glyndwr.ac.uk",
+        "название": "Университет Глиндер",
         "страна": "Великобритания",
         "язык": "en",
-        "программы":"https://www.northumbria.ac.uk/study-at-northumbria/"
+        "программы": "https://www.glyndwr.ac.uk/en/Postgraduatecourses/"
     },
     #     {
     #     "url": "https://www.glyndwr.ac.uk",
