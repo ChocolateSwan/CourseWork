@@ -6,8 +6,11 @@ from test_files.lang_module import find_synonyms, find_antonyms
 from functools import reduce
 from test_files.utils import cut_found_arr
 from .program_dict import PROGRAMS
+from flask_mysqldb import MySQL
+
 
 MIN_COUNT = 20
+# mysql = MySQL(app)
 
 @app.route('/', methods=['GET',"POST"])
 def search():
