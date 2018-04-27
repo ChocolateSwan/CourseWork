@@ -8,10 +8,10 @@ from .program_dict import PROGRAMS
 
 class SearchForm(FlaskForm):
     search = StringField('слова для поиска', validators=[DataRequired("Не пустое")],
-                         render_kw={"class": "form-input form-input-width-60", "placeholder": "слова через & или |"})
+                         render_kw={"class": "form-input form-input-width-100", "placeholder": "слова через & или |"})
 
     unwanted_words = StringField('нежелательные слова',
-                         render_kw={"class": "form-input form-input-width-30 margin-left-1","placeholder": "нежелательные термины"})
+                         render_kw={"class": "form-input form-input-width-100","placeholder": "нежелательные термины"})
 
     # TODO choices as list
     select_url = SelectField(u'выбрать сайт для поиска',

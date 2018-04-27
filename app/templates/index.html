@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Диплом</title>
+    <title>система</title>
     <link href="/static/css/styles.css" rel="stylesheet" media="screen">
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="/static/js/form_control.js"></script>
 </head>
+<body>
 
     <div>
         <h3>Выбор программ обучения и стажировок за рубежом</h3>
@@ -17,12 +18,9 @@
             <input value="справка &#9660;" class="info-btn" id ="info-btn" type="button" >
         <div class="info" id="info">
             В поле ввода слов вводятся слова следующими способами: через & - пересечение, через | -объединение.
-            <br>
             В поле справа можно ввести слова, которые не должны появляться на выданных страницах.
-            <br>
             Есть возможность выбрать сайт для поиска из списка или ввести собственный адрес сайта,
             поставив галочку в поле "другой сайт".
-            <br>
             После отправки поскового запроса в окошке справа начнут выводиться подсказки, и под формой слева будет
             показана поисковая выдача.
         </div>
@@ -36,26 +34,22 @@
                 <span>
                     {{ form.search() }}
                 </span>
-                <span>
+                <span id="search_error" class="error">
+                </span>
+                <p>
                     {{form.unwanted_words}}
-                </span>
-                <span id="search_error" style="color: red;">
-                </span>
+                </p>
+
             </p>
         </div>
         <div>
+            <p>
             <span>
                 {{ form.select_url() }}
             </span>
-            <span>
-                {{ form.another_site_flag() }}
-                {{ form.another_site_flag.label }}
+            <span id="select_error" class="error">
             </span>
-            <span>
-                {{ form.another_site() }}
-            </span>
-            <span id="url_error" style="color: red;">
-            </span>
+            </p>
         </div>
         <div style=" width:100%;display:inline-block;">
             <p style='float: right;'>

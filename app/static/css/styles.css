@@ -9,13 +9,12 @@
 
 body{
     background-color: #dbecff;
+    overflow-x:hidden;
 }
 
 h3 {
     font: var(--font);
-    font-size: 44px;
-    /*letter-spacing: 2px;*/
-    /*max-width: 400px;*/
+    font-size: 70px;
     width: 100%;
     position: relative;
     display: inline-block;
@@ -45,15 +44,15 @@ form {
     outline: none;
     background: white;
     color: black;
-    font-size: 19px;
+    font-size: 25px;
 }
 
 .form-input:disabled{
     background: #c8daff;
 }
 
-.form-input-width-60{
-        width: 60%;
+.form-input-width-100{
+        width: 100%;
 }
 
 .form-input-width-30{
@@ -69,7 +68,7 @@ form {
 }
 
 .form-btn {
-    font-size: 26px;
+    font-size: 35px;
     color: white;
     border: none;
     padding: 10%;
@@ -134,10 +133,11 @@ select {
     border: 2px solid var(--line-color);
     background: white;
     color: #333;
-    font: 20px/1em sans-serif;
+    font: 25px/1em sans-serif;
     outline:none;
-    width: 40%;
+    width: 50%;
     padding-left: 1%;
+    /*content: "▼";*/
 }
 
 select:disabled{
@@ -173,7 +173,7 @@ select option {
     border: 2px solid var(--line-color);
     border-radius: var(--border-radius);
     color: #000000;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
 }
 .left {
@@ -183,6 +183,7 @@ select option {
     margin: 10px ;
     padding: 2%;
     background: white;
+    font-size: 25px;
 
 }
 
@@ -194,7 +195,7 @@ select option {
     background-color:  #dbecff;
     cursor: pointer;
     outline:none;
-    font-size: 16px;
+    font-size: 25px;
 
 }
 
@@ -210,11 +211,20 @@ select option {
     padding: 10px;
     text-align: center;
     display: none;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.error{
+    color: red;
+    font-size: 25px
 }
 
 footer{
     border-top:1px solid var(--line-color);
 
+}
+
+.red_border{
+    border-color: red;
 }
 
