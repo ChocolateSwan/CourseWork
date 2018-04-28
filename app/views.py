@@ -7,36 +7,71 @@ from functools import reduce
 from test_files.utils import cut_found_arr
 from .program_dict import PROGRAMS
 from flask_mysqldb import MySQL
+import _mysql
+import MySQLdb
+import os
 
 
 MIN_COUNT = 20
-# mysql = MySQL(app)
+
+
+def connection():
+    conn = MySQLdb.connect(host="localhost",user="graduate_work",
+                  passwd="graduate_work",db="GraduateWork")
+    c = conn.cursor()
+
+    return c, conn
+
+# @app.before_request
+# def before_request():
+#     print("hdsbdhb")
+#     # g.db.connect()  #note the connection to the database here
+#
+# @app.after_request
+# def after_request(response):
+#     print("hjsvvvvv")
+#     # g.db.close()
+#     return response
+
 
 @app.route('/', methods=['GET',"POST"])
 def search():
+    # try:
+    #     c, conn = connection()
+    #     c.execute("""SELECT * FROM synonym where synonym_id = 1 or synonym_id = 2""")
+    #     print("sdv", c.fetchall())
+    #     # c.close()
+    # except Exception as e:
+    #     print(str(e))
+
     form = SearchForm() # csrf_enabled=False
     return render_template("index.html",
-                           form=form,
-                           results="не было поиска")
+                           form=form,)
 
 
+@app.route('/static/')
+def static_file():
+    print("jdnv")
+    return app.send_static_file("static/css/test.html")
+
+@app.route('/js/<path:path>')
+def serve_static(path):
+    root_dir = os.path.dirname(os.getcwd())
+    print(os.path.join(root_dir, 'static', 'js', path))
+    return app.send_static_file(os.path.join(root_dir, 'static', 'js', path))
 
 
 @app.route('/process_form/', methods=['post'])
 def process_form():
     form = SearchForm()
 
-    # TODO переписать иф покороче
-    if form.data['another_site_flag']:
-        url = form.data['another_site']
-    else:
-        url = form.data['select_url']
-        program = list(filter(lambda x: x["url"] == url,PROGRAMS))
-        print(program)
-        try:
-            url = program[0]['программы']
-        except:
-            url = url
+    url = form.data['select_url']
+    program = list(filter(lambda x: x["url"] == url,PROGRAMS))
+    print(program)
+    try:
+        url = program[0]['программы']
+    except:
+        url = ""
 
     word = form.data['search']
     word = word.replace("&", "*")
