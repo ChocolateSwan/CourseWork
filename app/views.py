@@ -54,11 +54,13 @@ def static_file():
     print("jdnv")
     return app.send_static_file("static/css/test.html")
 
-@app.route('/js/<path:path>')
+
+@app.route('/documentation/<path:path>')
 def serve_static(path):
-    root_dir = os.path.dirname(os.getcwd())
-    print(os.path.join(root_dir, 'static', 'js', path))
-    return app.send_static_file(os.path.join(root_dir, 'static', 'js', path))
+    return render_template('documentation/'+path)
+    # root_dir = os.path.dirname(os.getcwd())
+    # print(os.path.join(root_dir,'CourseWork','app', 'static', 'js', path))
+    # return app.send_static_file(os.path.join(root_dir,'CourseWork', 'app','static', 'js', 'form_control.js'))
 
 
 @app.route('/process_form/', methods=['post'])

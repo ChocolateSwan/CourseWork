@@ -52,6 +52,7 @@ class Spider(scrapy.Spider):
 
     def parse(self, response):
 
+
         url_without_scheme = re.findall(r"https?://([\w/.-]*)", response.url)[0]
 
         if url_without_scheme not in self.visited_urls:
