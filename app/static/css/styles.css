@@ -1,14 +1,15 @@
+/*TODO шрифт, кнопки, бордер у селекта*/
 
 :root {
     --line-color: #1000b2;
     --font:sans-serif;
     --border-radius: 5px;
-
 }
 
 body{
     background-color: #dbecff;
     overflow-x:hidden;
+
 }
 
 h3 {
@@ -139,18 +140,57 @@ select {
     /*content: "▼";*/
 }
 
-select:disabled{
-        background: #c8daff;
-}
-
-
-select option {
+.selectr-selected{
+    border-radius: var(--border-radius)!important;
+    border: 2px solid var(--line-color) !important;
+    font-size: 25px;
     outline:none;
-    /*margin: 40px;*/
-    /*background: black !important;*/
-    /*color: blue;*/
-    /*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*/
+    width: 70% !important;
 }
+
+.selectr-tag{
+    background-color: #1000B2 !important;
+}
+
+.selectr-input{
+    border: 2px solid var(--line-color) !important;
+    outline:none;
+    font-size: 25px;
+}
+.selectr-option.selected{
+    background-color: #C8DAFF !important;
+    color: black !important;
+}
+.selectr-option.active{
+    background-color: #1000B2 !important;
+    color: white !important;
+}
+
+.selectr-option{
+    font-size: 25px;
+}
+.selectr-notice{
+    font-size: 25px;
+}
+.selectr-options-container{
+    width: 70% !important;
+}
+.selectr-input-clear{
+    display: none !important;
+}
+
+/*select:disabled{*/
+        /*background: #c8daff;*/
+/*}*/
+
+
+/*select option {*/
+    /*outline:none;*/
+    /*!*margin: 40px;*!*/
+    /*!*background: black !important;*!*/
+    /*!*color: blue;*!*/
+    /*!*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*!*/
+/*}*/
 
 .results{
     color: black;
@@ -224,6 +264,6 @@ footer{
 }
 
 .red_border{
-    border-color: red;
+    border-color: red !important;
 }
 

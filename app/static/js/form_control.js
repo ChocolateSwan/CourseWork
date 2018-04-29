@@ -9,9 +9,12 @@ $(document).ready(function() {
     const info_btn = document.getElementById('info-btn');
     const info = document.getElementById('info');
 
+    const mySelectr = new Selectr(document.getElementById('select_url'));
+
 
     $('form').submit(function (e) {
         e.preventDefault();
+
         const url = "/process_form/";
         if (validate_form()){
             console.log("Validation ok");
@@ -87,7 +90,7 @@ $(document).ready(function() {
         return search.value !== "" &&
             !predicate_validate_and_or_words() &&
             !predicate_validate_words_other()&&
-                select_url.value !== "не выбрано"
+                $(select_url).val()
 
     }
 
@@ -155,15 +158,15 @@ $(document).ready(function() {
     }
 
     function validate_select() {
-        if (select_url.value === "не выбрано"){
+        if (!$(select_url).val()){
             if (!~select_error.innerText.indexOf("выберите") ){
-                select_error.innerText += " [выберите сайт из списка] ";
+                select_error.innerText += " [выберите сайт(ы) из списка] ";
                 $(select_url).addClass("red_border");
             }
         }
         else {
             select_error.innerText =
-            select_error.innerText.replace('[выберите сайт из списка]','');
+            select_error.innerText.replace('[выберите сайт(ы) из списка]','');
             $(select_url).removeClass("red_border");
         }
     }

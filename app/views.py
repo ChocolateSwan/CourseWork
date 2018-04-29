@@ -53,9 +53,13 @@ def search():
 def process_form():
     form = SearchForm()
 
+    print("dvfd",form.data['select_url'])
+
+
     url = form.data['select_url']
     program = list(filter(lambda x: x["url"] == url,PROGRAMS))
     print(program)
+
     try:
         url = program[0]['программы']
     except:
