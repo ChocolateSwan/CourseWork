@@ -83,5 +83,4 @@ PROGRAMS = [
         "язык": "en",
         "программы": "http://localhost:5111/documentation/Artist_job.html"
     },
-
 ]
