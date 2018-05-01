@@ -28,14 +28,13 @@ def search():
 def process_form():
     form = SearchForm()
 
-    url = form.data['select_url']
-    programs = list(filter(lambda x: x["url"] in url, PROGRAMS))
+    urls = form.data['select_url']
+    programs = list(filter(lambda x: x["url"] in urls, PROGRAMS))
 
     try:
         urls = list(map(lambda x: x["программы"], programs))
-        url = programs[0]['программы']
     except:
-        url = ""
+        urls = []
 
     word = form.data['search']
     word = word.replace("&", "*")
@@ -91,10 +90,10 @@ def process_form():
     else:
 
         try:
-            requests.get(url)
+            for url in urls:
+                requests.get(url)
         except:
-            # TODO а если сайт уже написан???? сделать if, и наверное надо перенести это в начало
-            message = "Поиск не удался! Вы уверены, что вы правильно написали адрес сайта?"
+            message = "Поиск не удался! Адрес сайта(ов) неверный!"
             return jsonify(data={
                 'results': response,
                 'message': message,

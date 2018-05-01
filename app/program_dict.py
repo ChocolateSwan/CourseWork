@@ -78,7 +78,7 @@ PROGRAMS = [
     },
     {
         "url": "http://localhost:5111/documentation/Artist_job.html",
-        "название": "Atrist Word description",
+        "название": "Artist Word description",
         "страна": "Великобритания",
         "язык": "en",
         "программы": "http://localhost:5111/documentation/Artist_job.html"

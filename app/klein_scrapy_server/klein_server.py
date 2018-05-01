@@ -4,68 +4,63 @@ from klein import route, run
 from scrapy import signals
 from scrapy.crawler import CrawlerRunner
 
+from klein_config import (PORT,
+                           HOST,
+                           RUNNER_CONF)
 from spider import Spider
 
 
 class MyCrawlerRunner(CrawlerRunner):
-    """
-    Crawler object that collects items and returns output after finishing crawl.
-    """
+    """ Собирает itemы и возвращает результаты после окончания работы краулера"""
     def crawl(self, crawler_or_spidercls, *args, **kwargs):
-        # keep all items scraped
+        """Настройка работы краулера"""
+        # Все собранные itemы
         self.items = []
 
-        # create crawler (Same as in base CrawlerProcess)
+        # Создание краулера
         crawler = self.create_crawler(crawler_or_spidercls)
 
-        # handle each item scraped
+        # Перехват каждого собранного item
         crawler.signals.connect(self.item_scraped, signals.item_scraped)
 
-        # create Twisted.Deferred launching crawl
-        dfd = self._crawl(crawler, *args, **kwargs) #пробрасываем через кваргс word
+        # Создание Twisted.Deferred стартующего краулинг
+        dfd = self._crawl(crawler, *args, **kwargs)
 
-        # add callback - when crawl is done cal return_items
+        # Когда краулинг окончен вызывается return_items
         dfd.addCallback(self.return_items)
         return dfd
 
-    def item_scraped(self, item, response, spider):
+    def item_scraped(self, item):
+        """Перехват item и добавление его в список"""
         self.items.append(item)
 
     def return_items(self, result):
+        """Возврат всего собранного"""
         return self.items
 
 
 def return_spider_output(output):
-    """
-    :param output: items scraped by CrawlerRunner
-    :return: json with list of items
-    """
+    """После краулинга возвращает список itemов из краулера"""
     return json.dumps([dict(item) for item in output])
 
 
 @route("/")
 def schedule(request):
+    """Обработка запроса к краулеру"""
+    # Слова
     word = request.args[b"word"][0]
     word = word.decode('utf-8')
-    print(request.args[b"url"][0])
+    # Урл
     url = request.args[b"url"][0]
     url = url.decode('utf-8')
+    # Нежелательные термины
     unwanted = request.args[b"unwanted"][0]
     unwanted = unwanted.decode('utf-8')
-    print(unwanted)
-    runner = MyCrawlerRunner() #{"FEED_EXPORT_ENCODING":'utf-8'}
-    spider = Spider() # Зачем он заходит в инит в этой строке и в строке dfd = self._crawl(crawler, *args, **kwargs)
+    runner = MyCrawlerRunner(RUNNER_CONF)
+    spider = Spider()
     deferred = runner.crawl(spider, word=word, url=url, unwanted=unwanted)
     deferred.addCallback(return_spider_output)
     return deferred
 
 
-run("localhost", 8900)
-
-# TODO настройки в раннер
-# process = CrawlerRunner({
-#         "CONCURRENT_REQUESTS": 100,
-#         "REACTOR_THREADPOOL_MAXSIZE": 20,
-#         'LOG_LEVEL': 'INFO',
-#         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-#     })
+run(HOST, PORT)
