@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84bf6824-5e6f-48f7-86e2-9654269f41ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/forms.py" afterPath="$PROJECT_DIR$/app/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/program_dict.py" afterPath="$PROJECT_DIR$/app/program_dict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_files/lang_module.py" afterPath="$PROJECT_DIR$/test_files/lang_module.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/js/form_control.js" afterPath="$PROJECT_DIR$/app/static/js/form_control.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lang_module.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lang_module.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_files/lang_module.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="41" column="18" lean-forward="false" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            <state relative-caret-position="57">
+              <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="21" />
               <folding>
                 <marker date="1525170131447" expanded="true" signature="511:522" ph="select h.nam... highschooler" />
                 <marker date="1525170131447" expanded="true" signature="511:785" ph="select word1... word" />
@@ -106,11 +103,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form_control.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="form_control.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1550">
-              <caret line="165" column="9" lean-forward="true" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
+            <state relative-caret-position="203">
+              <caret line="92" column="43" lean-forward="false" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -202,11 +199,11 @@
         <option value="$PROJECT_DIR$/app/static/dist/selectr.min.css" />
         <option value="$PROJECT_DIR$/app/static/dist/selectr.min.js" />
         <option value="$PROJECT_DIR$/app/static/css/styles.css" />
-        <option value="$PROJECT_DIR$/app/static/js/form_control.js" />
         <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/app/program_dict.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/test_files/lang_module.py" />
+        <option value="$PROJECT_DIR$/app/static/js/form_control.js" />
       </list>
     </option>
   </component>
@@ -217,7 +214,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="61" />
+    <option name="x" value="1981" />
     <option name="y" value="-4" />
     <option name="width" value="1859" />
     <option name="height" value="1084" />
@@ -459,7 +456,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="61" y="-4" width="1859" height="1084" extended-state="6" />
+    <frame x="1981" y="-4" width="1859" height="1084" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2882582" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -815,14 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1550">
-          <caret line="165" column="9" lean-forward="true" selection-start-line="165" selection-start-column="9" selection-end-line="165" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -877,14 +866,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_files/lang_module.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="41" column="18" lean-forward="false" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        <state relative-caret-position="57">
+          <caret line="51" column="21" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="21" />
           <folding>
             <marker date="1525170131447" expanded="true" signature="511:522" ph="select h.nam... highschooler" />
             <marker date="1525170131447" expanded="true" signature="511:785" ph="select word1... word" />
             <marker date="1525170131447" expanded="true" signature="511:1107" ph="select word1... " />
             <marker date="1525170131447" expanded="true" signature="833:1107" ph="select word1... word" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/form_control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="92" column="43" lean-forward="false" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -67,6 +67,8 @@ $(document).ready(function() {
             console.log("Validation fail");
             // Если нет слов в запросе
             validate_empty_word_input();
+            //русские символы в запросе
+            validate_cyrillic_symbols();
             // Если в строке и & и |
             validate_and_or_words();
             // Если невалиднен селект
@@ -88,6 +90,7 @@ $(document).ready(function() {
 
     function validate_form() {
         return search.value !== "" &&
+            !/[а-яА-ЯЁё]/.test(search.value)&&
             !predicate_validate_and_or_words() &&
             !predicate_validate_words_other()&&
                 $(select_url).val()
@@ -105,6 +108,23 @@ $(document).ready(function() {
         else{
             search_error.innerText =
             search_error.innerText.replace('[заполните это поле]','');
+            if (search_error.innerText === ""){
+                $(search).removeClass("red_border");
+            }
+        }
+    }
+
+    function validate_cyrillic_symbols() {
+        if (/[а-яА-ЯЁё]/.test(search.value)){
+            if (!~search_error.innerText.indexOf("латиница") ){
+                search_error.innerText += " [должна присутствовать только латиница] ";
+                $(search).addClass("red_border");
+            }
+
+        }
+        else{
+            search_error.innerText =
+            search_error.innerText.replace('[должна присутствовать только латиница]','');
             if (search_error.innerText === ""){
                 $(search).removeClass("red_border");
             }
