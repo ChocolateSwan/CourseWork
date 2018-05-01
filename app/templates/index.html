@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>система</title>
-    <link href="/static/css/styles.css" rel="stylesheet" media="screen">
+
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 
 
     <link href="/static/dist/selectr.min.css" rel="stylesheet">
     <script src="/static/dist/selectr.min.js"></script>
 
+    <link href="/static/css/styles.css" rel="stylesheet" media="screen">
 
     <script src="/static/js/form_control.js"></script>
 
@@ -40,11 +41,15 @@
             <p>
                 <span>
                     {{ form.search() }}
+                    <input value="&" class="and_or" id ="and" type="button" >
+                    <input value="|" class="and_or" id ="or" type="button" >
                 </span>
+
                 <span id="search_error" class="error">
                 </span>
                 <p>
                     {{form.unwanted_words}}
+            <span id="unwanted_error" class="error"></span>
                 </p>
             </p>
         </div>

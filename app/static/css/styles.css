@@ -7,6 +7,7 @@
 }
 
 body{
+    font: 400 13.3333px Arial;
     background-color: #dbecff;
     overflow-x:hidden;
 
@@ -45,6 +46,7 @@ form {
     background: white;
     color: black;
     font-size: 25px;
+    margin-left: 1px;
 }
 
 .form-input:disabled{
@@ -55,8 +57,8 @@ form {
         width: 100%;
 }
 
-.form-input-width-30{
-        width: 30%;
+.form-input-width-90{
+        width: 85%;
 }
 
 .form-input-width-50{
@@ -148,15 +150,7 @@ select {
     width: 70% !important;
 }
 
-.selectr-tag{
-    background-color: #1000B2 !important;
-}
 
-.selectr-input{
-    border: 2px solid var(--line-color) !important;
-    outline:none;
-    font-size: 25px;
-}
 .selectr-option.selected{
     background-color: #C8DAFF !important;
     color: black !important;
@@ -266,4 +260,23 @@ footer{
 .red_border{
     border-color: red !important;
 }
+
+.and_or{
+    width: 4%;
+    font-size: 25px;
+    background-color: #1000B2;
+    color: white;
+    border: 0px;
+    border-radius: var(--border-radius);
+    outline:none;
+    cursor: pointer;
+
+}
+.and_or:active {
+  background-color: #c8daff;
+}
+.and_or:disabled {
+  background-color: #898282;
+}
+
 

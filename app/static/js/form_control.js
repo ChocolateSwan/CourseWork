@@ -8,6 +8,13 @@ $(document).ready(function() {
     const hints = document.getElementById('hints');
     const info_btn = document.getElementById('info-btn');
     const info = document.getElementById('info');
+    const selectr_selected = document.getElementsByClassName('selectr-selected');
+    const or_btn = document.getElementById('or');
+    const and_btn = document.getElementById('and');
+    // alert(selectr_selected);
+
+    const unwanted_error = document.getElementById('unwanted_error');
+    const unwanted_words = document.getElementById('unwanted_words');
 
     const mySelectr = new Selectr(document.getElementById('select_url'));
 
@@ -21,9 +28,12 @@ $(document).ready(function() {
 
             $(select_error).empty();
             $(search_error).empty();
+            $(unwanted_error).empty();
 
             $(search).removeClass("red_border");
             $(select_url).removeClass("red_border");
+            $(unwanted_words).removeClass("red_border");
+            $(selectr_selected).removeClass("red_border");
 
             $(hints).empty();
             $(hints).append( "Идет поиск, ждите результатов!" );
@@ -181,13 +191,13 @@ $(document).ready(function() {
         if (!$(select_url).val()){
             if (!~select_error.innerText.indexOf("выберите") ){
                 select_error.innerText += " [выберите сайт(ы) из списка] ";
-                $(select_url).addClass("red_border");
+                $(selectr_selected).addClass("red_border");
             }
         }
         else {
             select_error.innerText =
             select_error.innerText.replace('[выберите сайт(ы) из списка]','');
-            $(select_url).removeClass("red_border");
+            $(selectr_selected).removeClass("red_border");
         }
     }
 
@@ -205,5 +215,84 @@ $(document).ready(function() {
         }
 
 
-    })
+    });
+
+
+    $(or_btn).click(function (e) {
+        e.preventDefault();
+        search.value += "|";
+        $(and_btn).prop('disabled', true);
+
+    });
+    $(and_btn).click(function (e) {
+        e.preventDefault();
+        search.value += "&";
+        $(or_btn).prop('disabled', true);
+    });
+
+    $( search ).on( "keyup", function(e) {
+        if (e.keyCode === 8){
+            if (!~search.value.indexOf("&") && !~search.value.indexOf("|")){
+                $(and_btn).prop('disabled', false);
+                $(or_btn).prop('disabled', false);
+            }
+        }
+});
+    $(search).keypress(function(e){
+        e.preventDefault();
+
+        if (e.key === "|" && ~search.value.indexOf("&")){
+            return;
+        }
+        if (e.key === "&" && ~search.value.indexOf("|")){
+            return;
+        }
+        if (e.key === "&"){
+            $(or_btn).prop('disabled', true);
+        }
+        if (e.key === "|"){
+            $(and_btn).prop('disabled', true);
+        }
+        if (/[a-zA-Z&|.\s]/.test(e.key)){
+          search.value += e.key
+        }
+        if (/[а-яА-ЯЁё]/.test(e.key)){
+            if (!~search_error.innerText.indexOf("латиница") ){
+                search_error.innerText += " [должна присутствовать только латиница] ";
+                $(search).addClass("red_border");
+            }
+
+        }
+        else{
+            search_error.innerText =
+            search_error.innerText.replace('[должна присутствовать только латиница]','');
+            if (search_error.innerText === ""){
+                $(search).removeClass("red_border");
+            }
+        }
+    });
+
+     $(unwanted_words).keypress(function(e){
+        e.preventDefault();
+
+        if (/[a-zA-Z&|.\s]/.test(e.key)){
+          unwanted_words.value += e.key
+        }
+        if (/[а-яА-ЯЁё]/.test(e.key)){
+            if (!~unwanted_error.innerText.indexOf("латиница") ){
+                unwanted_error.innerText += " [должна присутствовать только латиница] ";
+                $(unwanted_words).addClass("red_border");
+            }
+
+        }
+        else{
+            unwanted_error.innerText =
+            unwanted_error.innerText.replace('[должна присутствовать только латиница]','');
+            if (unwanted_error.innerText === ""){
+                $(unwanted_words).removeClass("red_border");
+            }
+        }
+    });
+
+
 });

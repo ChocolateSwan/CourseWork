@@ -6,7 +6,7 @@ from .program_dict import PROGRAMS
 class SearchForm(FlaskForm):
     """Форма для поиска"""
     search = StringField('слова для поиска',
-                         render_kw={"class": "form-input form-input-width-100",
+                         render_kw={"class": "form-input form-input-width-90",
                                     "placeholder": "слова через & или |"})
 
     unwanted_words = StringField('нежелательные слова',
