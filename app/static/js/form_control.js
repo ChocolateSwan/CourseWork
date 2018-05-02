@@ -231,68 +231,25 @@ $(document).ready(function() {
     });
 
     $( search ).on( "keyup", function(e) {
+        console.log(e.keyCode)
         if (e.keyCode === 8){
             if (!~search.value.indexOf("&") && !~search.value.indexOf("|")){
                 $(and_btn).prop('disabled', false);
                 $(or_btn).prop('disabled', false);
             }
         }
-});
-    $(search).keypress(function(e){
-        e.preventDefault();
-
-        if (e.key === "|" && ~search.value.indexOf("&")){
-            return;
+        if (e.keyCode === 220 && !(~search.value.indexOf("&")&&search.value.slice(-1)==="|")){
+             $(and_btn).prop('disabled', true);
         }
-        if (e.key === "&" && ~search.value.indexOf("|")){
-            return;
+        if (e.keyCode === 220 && ~search.value.indexOf("&")){
+            search.value = search.value.slice(0, -1)
         }
-        if (e.key === "&"){
-            $(or_btn).prop('disabled', true);
+        if (e.keyCode === 55 && !(~search.value.indexOf("|")&&search.value.slice(-1)==="&")){
+             $(or_btn).prop('disabled', true);
         }
-        if (e.key === "|"){
-            $(and_btn).prop('disabled', true);
-        }
-        if (/[a-zA-Z&|.\s]/.test(e.key)){
-          search.value += e.key
-        }
-        if (/[а-яА-ЯЁё]/.test(e.key)){
-            if (!~search_error.innerText.indexOf("латиница") ){
-                search_error.innerText += " [должна присутствовать только латиница] ";
-                $(search).addClass("red_border");
-            }
-
-        }
-        else{
-            search_error.innerText =
-            search_error.innerText.replace('[должна присутствовать только латиница]','');
-            if (search_error.innerText === ""){
-                $(search).removeClass("red_border");
-            }
+        if (e.keyCode === 55 && ~search.value.indexOf("|")){
+            search.value = search.value.slice(0, -1)
         }
     });
-
-     $(unwanted_words).keypress(function(e){
-        e.preventDefault();
-
-        if (/[a-zA-Z&|.\s]/.test(e.key)){
-          unwanted_words.value += e.key
-        }
-        if (/[а-яА-ЯЁё]/.test(e.key)){
-            if (!~unwanted_error.innerText.indexOf("латиница") ){
-                unwanted_error.innerText += " [должна присутствовать только латиница] ";
-                $(unwanted_words).addClass("red_border");
-            }
-
-        }
-        else{
-            unwanted_error.innerText =
-            unwanted_error.innerText.replace('[должна присутствовать только латиница]','');
-            if (unwanted_error.innerText === ""){
-                $(unwanted_words).removeClass("red_border");
-            }
-        }
-    });
-
 
 });
