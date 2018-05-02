@@ -39,7 +39,7 @@ $(document).ready(function() {
             $(hints).append( "Идет поиск, ждите результатов!" );
 
             $(results).empty();
-            $(results).append( "Тут будет поисковая выдача" );
+            $(results).append( "Блок поисковой выдачи" );
 
             $.ajax({
                 type: "POST",
@@ -66,7 +66,7 @@ $(document).ready(function() {
             },
                 error: function () {
                     $(hints).empty();
-                    $(hints).append( "Что то пошло не так :(" );
+                    $(hints).append( "Сервис недоступен или произошли непредвиденные обстоятельства!" );
                     $(results).empty();
                     $(results).append( "Поиск не дал результатов" );
                 }
@@ -110,14 +110,14 @@ $(document).ready(function() {
     function validate_empty_word_input() {
         if (search.value === ""){
             if (!~search_error.innerText.indexOf("заполните") ){
-                search_error.innerText += " [заполните это поле] ";
+                search_error.innerText += " [заполните поле] ";
                 $(search).addClass("red_border");
             }
 
         }
         else{
             search_error.innerText =
-            search_error.innerText.replace('[заполните это поле]','');
+            search_error.innerText.replace('[заполните поле]','');
             if (search_error.innerText === ""){
                 $(search).removeClass("red_border");
             }
@@ -173,13 +173,13 @@ $(document).ready(function() {
     function validate_words_other() {
         if (predicate_validate_words_other()){
             if (!~search_error.innerText.indexOf("неверно") ){
-                search_error.innerText += " [неверно заполнено поле] ";
+                search_error.innerText += " [поле заполнено неверно] ";
                 $(search).addClass("red_border");
             }
         }
         else{
             search_error.innerText =
-            search_error.innerText.replace('[неверно заполнено поле]','');
+            search_error.innerText.replace('[поле заполнено неверно]','');
             if (search_error.innerText === ""){
                 $(search).removeClass("red_border");
             }
@@ -190,13 +190,13 @@ $(document).ready(function() {
     function validate_select() {
         if (!$(select_url).val()){
             if (!~select_error.innerText.indexOf("выберите") ){
-                select_error.innerText += " [выберите сайт(ы) из списка] ";
+                select_error.innerText += " [выберите вариант(ы) из списка] ";
                 $(selectr_selected).addClass("red_border");
             }
         }
         else {
             select_error.innerText =
-            select_error.innerText.replace('[выберите сайт(ы) из списка]','');
+            select_error.innerText.replace('[выберите вариант(ы) из списка]','');
             $(selectr_selected).removeClass("red_border");
         }
     }
@@ -231,7 +231,6 @@ $(document).ready(function() {
     });
 
     $( search ).on( "keyup", function(e) {
-        console.log(e.keyCode)
         if (e.keyCode === 8){
             if (!~search.value.indexOf("&") && !~search.value.indexOf("|")){
                 $(and_btn).prop('disabled', false);

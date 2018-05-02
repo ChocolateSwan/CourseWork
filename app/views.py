@@ -9,7 +9,10 @@ from utils.lang_module import find_synonyms_from_db
 from utils.utils import cut_found_arr
 
 
-MIN_COUNT = 20
+MIN_COUNT_OF_WORDS = 20
+MIN_COUNT_OF_PAGES = 5
+MAX_COUNT_OF_PAGES = 20
+
 conn = MySQLdb.connect(host="localhost",user="graduate_work",
                   passwd="graduate_work",db="GraduateWork")
 
@@ -61,7 +64,7 @@ def process_form():
 
     # Если скрапи недоступен или все плохо
     except Exception:
-        message = "Сайт недоступен или произошли непредвиденные обстоятельства!"
+        message = "Сервис недоступен или произошли непредвиденные обстоятельства!"
         return jsonify(data={
             'results': [],
             'message': message,
@@ -73,29 +76,38 @@ def process_form():
     # Если были результаты поиска
     if response:
         sum_all_resp = sum(list(map(lambda el: el['count'], response)))
+        sum_all_pages = len(response)
 
-        print("Debug: Всего от Scrapy {sum} совпадений.".format(sum=sum_all_resp))
+        print("Debug: Всего от Scrapy {sum} совпадений на {pages} страницах."
+              .format(sum=sum_all_resp, pages=sum_all_pages))
 
+        response = list(map(lambda x: cut_found_arr(x), response))
         # Если слишком мало результатов
-        if sum_all_resp < MIN_COUNT:
+        if sum_all_pages < MIN_COUNT_OF_PAGES:
             synonyms = find_synonyms_from_db(conn, words)
             # Если есть синонимы и результаты поиска
             if synonyms:
-                message = "Найдено всего {} совпадений(я). " \
-                          "Это очень мало, но найдены похожие слова. " \
-                          "Попробуйте: <br>".format(sum_all_resp) + \
+                message = "Найдено {} совпадений(я) на {} веб-страницах. " \
+                          "Объем результатов слишком мал, но найдены связанные с вашим запросом дескрипторы. " \
+                          "Вам стоит попробовать: <br>".format(sum_all_resp, sum_all_pages) + \
                           "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),
                                              synonyms)))
             else:
-                message = "Слишком мало совпадений ({}), и не найдено ни одного похожего слова!" \
-                          " Попробуйте другой поисковый запрос."\
-                    .format(sum_all_resp)
+                message = "Найдено {} совпадений(я) на {} веб-страницах. " \
+                          "Объем результатов мал и не найдено ни одного связанного с вашим запросом дескриптора." \
+                          " Возможно вам следует ввести другой поисковый запрос{}. "\
+                    .format(sum_all_resp, sum_all_pages,
+                            ' или отредактировать поле "исключаемые дескрипторы"' if len(unwanted_words) else "")
 
+        elif sum_all_pages > MAX_COUNT_OF_PAGES:
+            message = "Отлично! Поиск успешно состоялся - найдено {} совпадений на {} веб-страницах. Объем " \
+                      "результатов слишком велик. Возможно вам следует сузить область поиска " \
+                      '(например добавить дескрипторов в поле "исключаемые дескрипторы").' \
+                .format(sum_all_resp, sum_all_pages)
         else:
-            response = list(map(lambda x: cut_found_arr(x), response))
 
-            message = "Отлично! Поиск успешно состоялся - найдено {} совпадений."\
-                .format(sum_all_resp)
+            message = "Отлично! Поиск успешно состоялся - найдено {} совпадений на {} веб-страницах."\
+                .format(sum_all_resp,sum_all_pages)
 
     # Если нет результатов поиска
     else:
@@ -104,7 +116,7 @@ def process_form():
             for url in urls:
                 requests.get(url)
         except:
-            message = "Поиск не удался! Адрес сайта(ов) неверный!"
+            message = "Поиск не удался! Адреса сайтов возможно ошибочны!"
             return jsonify(data={
                 'results': [],
                 'message': message,
@@ -112,14 +124,14 @@ def process_form():
         # Если нет результатов поиска но есть синонимы
         synonyms = find_synonyms_from_db(conn, words)
         if synonyms:
-            message = "Не найдено ни одного совпадения, но найдены похожие слова. " \
-                      "Попробуйте: <br> " \
+            message = "Не найдено ни одного совпадения, но найдены связанные с вашим запросом дескрипторы. " \
+                      "Вам стоит попробовать: <br> " \
                       + "; ".join(list(map(lambda x: "{}: {}".format(x['word'], ", ".join(x["synonyms"])),
                                            synonyms)))
         # Если нет результатов поиска и нет синонимов
         else:
-            message = "Проверьте написание слов(а)! Возможно есть ошибки в написании" \
-                      " или у слов(а) нет похожих слов!"
+            message = "Проверьте написание дескрипторов! Возможно есть ошибки в написании" \
+                      " или связанных с вашим запросом дескрипторов не существует!"
 
     return jsonify(data={
         'results': response,

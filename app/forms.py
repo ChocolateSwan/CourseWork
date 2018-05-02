@@ -7,13 +7,13 @@ class SearchForm(FlaskForm):
     """Форма для поиска"""
     search = StringField('слова для поиска',
                          render_kw={"class": "form-input form-input-width-90",
-                                    "placeholder": "слова через & или |"})
+                                    "placeholder": "искомые дескрипторы (через & или |)"})
 
     unwanted_words = StringField('нежелательные слова',
                         render_kw={"class": "form-input form-input-width-100",
-                                    "placeholder": "нежелательные термины"})
+                                    "placeholder": "исключаемые дескрипторы"})
 
-    select_url = SelectMultipleField('выбрать сайт для поиска',
+    select_url = SelectMultipleField('университеты и программы',
                                      render_kw={"class": "selectDemo sel"},
                                      choices=list(map(lambda p: (p['url'], p['название']), PROGRAMS)),)
 
