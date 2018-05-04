@@ -52,7 +52,7 @@ $(document).ready(function() {
                         $(results).empty();
 
                         data.data.results.forEach(function (el, index) {
-                            result_element= "<span> "+(index + 1) +". Адрес: <a href='"+el.url+"'>"+el.url+"</a> - найдено " +
+                            result_element= "<span> "+(index + 1) +". Веб-страница: <a href='"+el.url+"'>"+el.url+"</a> - найдено " +
                                 + el.count + " вариантов(а) </span>" +
                                 "<br><span> Найденные варианты: " + el.found_arr.join(", ") + "</span> <br> <br>";
                             $(result_element).clone().appendTo( results );
