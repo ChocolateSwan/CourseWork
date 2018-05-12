@@ -75,6 +75,7 @@ def process_form():
 
     # Если были результаты поиска
     if response:
+        response = sorted(response, key=lambda x: x['count'], reverse=True)
         sum_all_resp = sum(list(map(lambda el: el['count'], response)))
         sum_all_pages = len(response)
 

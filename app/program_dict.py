@@ -63,24 +63,45 @@ PROGRAMS = [
         "программы": "https://www.koreatech.ac.kr/eng/sub02_02_01_01.do"
     },
     {
-        "url": "http://localhost:5111/documentation/description1.htm",
-        "название": "Business Administration Intern PDF description",
-        "страна": "Турция",
-        "язык": "en",
-        "программы": "http://localhost:5111/documentation/description1.htm"
-    },
-    {
-        "url": "http://localhost:5111/documentation/description2.htm",
-        "название": "Booking Agency Intern PDF description",
-        "страна": "Великобритания",
-        "язык": "en",
-        "программы": "http://localhost:5111/documentation/description2.htm"
-    },
-    {
         "url": "http://localhost:5111/documentation/Artist_job.html",
-        "название": "Artist Word description",
+        "название": "Веб-дизайнер - описание программы обучения",
         "страна": "Великобритания",
         "язык": "en",
         "программы": "http://localhost:5111/documentation/Artist_job.html"
+    },
+    {
+        "url": "http://localhost:5111/documentation/Tsinghua_University_Summer_School.html",
+        "название": "Университет Шингхуа - летняя школа (Китай)",
+        "страна": "Китай",
+        "язык": "en",
+        "программы": "http://localhost:5111/documentation/Tsinghua_University_Summer_School.html"
+    },
+    {
+        "url": "http://localhost:5111/documentation/2018_ASRTU_TECH_Summer_School.html",
+        "название": "ASRTU TECH - учебный план летней школы (Китай)",
+        "страна": "Китай",
+        "язык": "en",
+        "программы": "http://localhost:5111/documentation/2018_ASRTU_TECH_Summer_School.html"
+    },
+    {
+        "url": "http://localhost:5111/documentation/2018_ASRTU_TECH_Summer_School_description.html",
+        "название": "ASRTU TECH - описание летней школы (Китай)",
+        "страна": "Китай",
+        "язык": "en",
+        "программы": "http://localhost:5111/documentation/2018_ASRTU_TECH_Summer_School_description.html"
+    },
+    {
+        "url": "http://localhost:5111/documentation/Harbin_Institute_of_Technology_Summer_School.html",
+        "название": "Харбинский институт технологий - летняя школа (Китай)",
+        "страна": "Китай",
+        "язык": "en",
+        "программы": "http://localhost:5111/documentation/Harbin_Institute_of_Technology_Summer_School.html"
+    },
+    {
+        "url": "http://localhost:5111/documentation/Schedule_XJTU_ChineseLanguage_Summer_Camp.html",
+        "название": "XJTU летняя школа - расписание (Китай)",
+        "страна": "Китай",
+        "язык": "en",
+        "программы": "http://localhost:5111/documentation/Schedule_XJTU_ChineseLanguage_Summer_Camp.html"
     },
 ]
